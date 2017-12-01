@@ -19,7 +19,6 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author fabri
  */
-
 @WebServlet(urlPatterns = {"/signin-submit"})
 public class AuthenticationServlet extends HttpServlet {
 
@@ -88,18 +87,19 @@ public class AuthenticationServlet extends HttpServlet {
                         = AuthenticationUtility.Authenticate(username, password);
 
                 if (authentication != null) {
-                    if(authentication.isRegistered()){
-                    
-                    request.getSession().setAttribute("IDTOKEN", authentication.getIdToken());
-                     request.getSession().setAttribute("signInResult", null);
-                      request.getRequestDispatcher("index.jsp").forward(request, response);
-                    }else{
-                        //SENHA OU LOGIN INVALIDO
+                    if (authentication.isRegistered()) {
+
+                        request.getSession().setAttribute("IDTOKEN", authentication.getIdToken());
+                        request.getSession().setAttribute("signInResult", null);
+                        response.sendRedirect("index.jsp");
+
+                    } else {
+                        
                         request.getSession().setAttribute("signInResult", "Usuário ou senha incorretos");
-                         request.getRequestDispatcher("login.jsp").forward(request, response);
+                        response.sendRedirect("login.jsp");
                     }
                 }
-               
+
             }
 
         }

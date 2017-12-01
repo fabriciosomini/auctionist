@@ -10,6 +10,8 @@ package Models;
  * @author fabri
  */
 public class Item {
-    
-    
+   
+    private String description;
+    private float initialAmount;
+  
 }

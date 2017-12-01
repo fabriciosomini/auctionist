@@ -7,4 +7,7 @@ package Models;
 
 public class Bid {
 
+    private Item item;
+    private float bidAmount;
+    
 }
