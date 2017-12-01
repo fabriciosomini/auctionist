@@ -5,6 +5,8 @@
  */
 package Controllers;
 
+import Models.AuthenticationResponse;
+import Utils.AuthenticationUtility;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -35,6 +37,8 @@ public class AuctionController extends HttpServlet {
         String routePath = request.getServletPath();
 
         if (routePath.endsWith("/list")) {
+            
+       
             request.getRequestDispatcher("index.jsp").forward(request, response);
         }
     }
@@ -65,7 +69,8 @@ public class AuctionController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+     
+    
     }
 
     /**

@@ -4,9 +4,17 @@
         <servlet-name>AuctionController</servlet-name>
         <servlet-class>Controllers.AuctionController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AuthenticationServlet</servlet-name>
+        <servlet-class>Controllers.AuthenticationServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>AuctionController</servlet-name>
         <url-pattern>/AuctionController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AuthenticationServlet</servlet-name>
+        <url-pattern>/AuthenticationServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

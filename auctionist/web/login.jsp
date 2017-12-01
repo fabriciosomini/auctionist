@@ -28,7 +28,12 @@
                             <form method="POST" action="signin-submit">
                                 <input type="text" class="form-control" name="txtLogin" placeholder="Nome de usuário" />
                                 <input type="password" class="form-control" name="txtPass" placeholder="Senha" />
+                               <div style="color: red" ${ signInResult ? 'style="visibility: hidden"'
+                                       : 'style="visibility: visible"'}
+                                    >${signInResult}</div>
                                 <input type="submit" class="form-control btn btn-block btn-dark btn-login" name="btnLogin" value="Entrar" />
+                                
+
                             </form>
                         </div>
                         <div class="col-4"></div>
