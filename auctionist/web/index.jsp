@@ -1,5 +1,5 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-
 <html>
     <head>
         <title>Auctionist!</title>
@@ -15,17 +15,17 @@
         <div class="top-index">
             <div class="container">
                 <div class="row">
-                    <div class="col-3">
+                    <div class="col-6">
                         <img src="imgs/W4U_A4-S.png" alt="logo_auctionist"/>
                     </div>
                     <div class="col-2 menu">
                         <a href="#">INÍCIO</a>
                     </div>
                     <div class="col-2 menu">
-                        <a href="#">INÍCIO</a>
+                        <a href="#">MENU 2</a>
                     </div>
                     <div class="col-2 menu">
-                        <a href="#">INÍCIO</a>
+                        <a href="#">MENU 3</a>
                     </div>
                 </div>
             </div>
@@ -33,13 +33,8 @@
 
         <div class="container">
             <div class="row">
-                <div class="col-12">UCUSMDFGDF
-                    <br />
-                    GFD
-                    GDGDFGDF
-                    <br />
-                    GDF
-                    <br />
+                <div class="col-12">
+
                 </div>
             </div>
         </div>

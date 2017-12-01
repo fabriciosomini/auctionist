@@ -1,0 +1,30 @@
+body {
+    background: #80bdff;
+}
+
+.top-index {
+    height: 100px;
+    width: 100%;
+    background: #b8daff;
+}
+
+.menu {
+    text-align: center;
+    margin-top: 2.3rem;
+}
+
+.menu a {
+    color: black;
+    display: inline;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.menu a:hover {
+    text-decoration: none;
+    color: #17a2b8;
+}
+
