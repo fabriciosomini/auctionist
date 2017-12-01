@@ -19,7 +19,7 @@
                         <img src="imgs/W4U_A4-S.png" alt="logo_auctionist"/>
                     </div>
                     <div class="col-2 menu">
-                        <a href="#">INÍCIO</a>
+                        <a href="list">INÍCIO</a>
                     </div>
                     <div class="col-2 menu">
                         <a href="#">MENU 2</a>

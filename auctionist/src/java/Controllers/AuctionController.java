@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author fabri
  */
-@WebServlet(urlPatterns = {"/auctionist"})
+@WebServlet(urlPatterns = {"/list"})
 public class AuctionController extends HttpServlet {
 
     /**
@@ -31,18 +31,11 @@ public class AuctionController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet AuctionController</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet AuctionController at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+ 
+        String routePath = request.getServletPath();
+
+        if (routePath.endsWith("/list")) {
+            request.getRequestDispatcher("index.jsp").forward(request, response);
         }
     }
 
