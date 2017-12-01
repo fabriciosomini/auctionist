@@ -1,11 +1,15 @@
-body {
-    background: #80bdff;
+body {    
+    background: url("imgs/pattern.png");
+    background-color: #b8daff;
 }
 
 .top-index {
     height: 100px;
-    width: 100%;
-    background: #b8daff;
+    width: 100%;   
+    background-color: #80bdff;
+    -webkit-box-shadow: 0px 1px 1px 0px rgba(0,0,0,0.3);
+    -moz-box-shadow: 0px 1px 1px 0px rgba(0,0,0,0.3);
+    box-shadow: 0px 1px 1px 0px rgba(0,0,0,0.3);
 }
 
 .menu {
@@ -24,7 +28,26 @@ body {
 
 .menu a:hover {
     text-decoration: none;
-    color: #17a2b8;
+    color: #ccf4ff;
     font-weight: bold;
 }
 
+.items-container {
+    -webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.3);
+    -moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.3);
+    box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.3);
+    border-radius: 10px;
+    margin-top: 1.5rem;
+    background-color: rgba(255, 255, 255, 0.7);
+    padding-top: 1rem;
+    min-height: 600px;
+}
+
+.footer {
+    text-align: center;
+}
+
+.footer p {
+    font-size: 18px;
+    font-weight: lighter;
+}
