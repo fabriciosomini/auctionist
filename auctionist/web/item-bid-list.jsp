@@ -27,7 +27,7 @@
                         <a href="create-item">CADASTRAR ITEM</a>
                     </div>
                     <div class="col-2 menu">
-                        <a href="sign-out">SAIR</a>
+                        <a href="signout">SAIR</a>
                     </div>
                 </div>
             </div>
@@ -52,6 +52,12 @@
                             <h5>Imagem (se tiver)</h5>
                         </div>-->
                     </div>
+                        <div class="row">
+                            <div class="col-2"></div>
+                            <div class="col-9">
+                                <textarea class="form-control" readonly="true" style="height: 100px; min-height: 60px; max-height: 150px;">${currentItem.description}</textarea>
+                            </div>
+                        </div>
                     <div class="row top-spaced">
                         <div class="col-2"></div>
                         <div class="col-3">
@@ -79,7 +85,7 @@
                     </div>
                     <hr style="width: 80%; margin-top: 1rem;"/>
 
-                    <div style="max-height: 500px; overflow-y: scroll; overflow-x: hidden;">
+                    <div style="max-height: 600px; overflow-y: scroll; overflow-x: hidden;">
                         <!-- ITEM BIDS -->
                         <c:forEach var="itemBid" items="${currentItem.bids}">
                             <div class="row" style="min-height: 50px;">

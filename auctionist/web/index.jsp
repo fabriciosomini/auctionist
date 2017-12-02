@@ -28,7 +28,7 @@
                         <a href="create-item">CADASTRAR ITEM</a>
                     </div>
                     <div class="col-2 menu">
-                        <a href="sign-out">SAIR</a>
+                        <a href="signout">SAIR</a>
                     </div>
                 </div>
             </div>
@@ -60,12 +60,12 @@
                                     <div class="col-8">${item.name}</div>
                                     <div class="col-2" style="text-align: right;">${item.highestBid}</div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-1"></div>
-                                    <div class="col-8"><p>${item.description}</p></div>
-                                </div>
                             </a>
                         </h6>
+                        <div class="row">
+                            <div class="col-1"></div>
+                            <div class="col-8"><p>${item.description}</p></div>
+                        </div>
                         <hr />
                     </c:forEach>
                 </div>                

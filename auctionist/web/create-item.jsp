@@ -27,7 +27,7 @@
                         <a href="create-item">CADASTRAR ITEM</a>
                     </div>
                     <div class="col-2 menu">
-                        <a href="sign-out">SAIR</a>
+                        <a href="signout">SAIR</a>
                     </div>
                 </div>
             </div>
