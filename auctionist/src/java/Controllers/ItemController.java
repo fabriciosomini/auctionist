@@ -25,7 +25,6 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(urlPatterns = {"/save-item", "/create-item", "/delete-item", "/list-item", "/item-bid-list"})
 public class ItemController extends HttpServlet {
 
- 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -39,17 +38,17 @@ public class ItemController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        String auth = (String)request.getSession().getAttribute("IDTOKEN");
+        String auth = (String) request.getSession().getAttribute("IDTOKEN");
         String routePath = request.getServletPath();
         if (routePath.endsWith("/list-item")) {
             request.setAttribute("itemCollection", ItemRepository.Get().GetItemList(auth));
             request.getRequestDispatcher("/index.jsp").forward(request, response);
         } else if (routePath.endsWith("/item-bid-list")) {
-            String id = (String)request.getParameter("id");
-            
-            
+            String id = (String) request.getParameter("id");
             request.setAttribute("currentItem", ItemRepository.Get().GetItem(auth, id));
             request.getRequestDispatcher("/item-bid-list.jsp").forward(request, response);
+        }else if (routePath.endsWith("/create-item")) {   
+            request.getRequestDispatcher("/create-item.jsp").forward(request, response);
         }
     }
 
@@ -84,7 +83,6 @@ public class ItemController extends HttpServlet {
         return items;
 
     }*/
-
     /**
      * Handles the HTTP <code>POST</code> method.
      *
@@ -96,7 +94,7 @@ public class ItemController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
     }
 
     /**
