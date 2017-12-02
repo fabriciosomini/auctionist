@@ -5,7 +5,7 @@
 <html>
     <head>
         <title>Auctionist! - Items</title>
-        <meta charset="UTF-8">
+        <meta charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
         <link href="bootstrap-grid.min.css" rel="stylesheet" type="text/css"/>
@@ -17,7 +17,7 @@
         <div class="top-index">
             <div class="container">
                 <div class="row">
-                    <div class="col-8">
+                    <div class="col-6">
                         <img src="imgs/W4U_A4-S.png" alt="logo_auctionist"/>
                     </div>
                     <div class="col-1 menu">
@@ -25,6 +25,9 @@
                     </div>
                     <div class="col-3 menu">
                         <a href="create-item">CADASTRAR ITEM</a>
+                    </div>
+                    <div class="col-2 menu">
+                        <a href="sign-out">SAIR</a>
                     </div>
                 </div>
             </div>
@@ -55,16 +58,16 @@
                             <h6>Lance inicial: R$ ${currentItem.initialAmount}</h6>
                         </div>
                     </div>
-                    <form method="POST" action="add-bid?id=${currentItem.id}">
+                    <form method="POST" action="add-bid?id=${currentItem.id}" accept-charset="iso-8859-1">
                         <div class="row top-spaced">
                             <div class="col-2"></div>                        
                             <div class="col-3">                           
                                 <h6>Maior lance: R$ ${currentItem.highestBid}</h6>
                             </div>
-                            <div class="col-2"></div>
-                            <div class="col-2">
+                            <div class="col-1"></div>
+                            <div class="col-3">
                                 <input type="number" class="form-control" placeholder="Valor" name="txtBidValue" />
-                                <p style="color: red;">${bidResult}</p>
+                                <p style="color: red; font-size: 12px;">${bidResult}</p>
                             </div>
                             <div class="col-2">
                                 <input type="submit" class="form-control btn btn-block btn-primary" value="Dar um lance" />
@@ -82,7 +85,7 @@
                             <div class="row" style="min-height: 50px;">
                                 <div class="col-2"></div>
                                 <div class="col-8" style="padding: 1rem;">
-                                    <p>O usuário <strong>${itemBid.bidder.name}</strong> deu um lance de <strong>${itemBid.bidAmount}</strong></p>
+                                    <p>O usuário <strong>${itemBid.bidder.name}</strong> deu um lance de <strong>R$ ${itemBid.bidAmount}</strong></p>
                                 </div>
                             </div>
                             <hr style="width: 80%; margin-top: 1rem;"/>
