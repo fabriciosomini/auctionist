@@ -35,41 +35,25 @@
         </div>
 
         <div id="cont" class="container">
-            <div class="row items-container">
+            <div class="row items-container">                
                 <!-- ITEM CONTAINER -->
                 <div class="col-12">
-
-                    <!-- ITEM -->
                     <div class="row">
-                        <div class="col-12">
-                            <div class="row">
-                                <div class="col-12">
-                                    <a href="item-bid-list.jsp">Titulo</a>
-                                </div>
-
-                            </div> 
-                            <div class="row">
-                                <div class="col-12">
-                                    Titulo 2
-                                </div>
-
-                            </div>  
-                            <div class="row">
-                                <div class="col-12">
-                                    Titulo 3
-                                </div>
-
-                            </div>  
-                        </div>
+                        <div class="col" style="text-align: center; margin-bottom: 1rem;"><h4>Lista de Leilões</h4></div>
                     </div>
-                    <!-- END ITEM -->
-
-                    <!-- END ITEM CONTAINER -->
-                </div>
-
-                <c:forEach var="item" items="${itemCollection}">
-                    <div><h4>${item.description}</h4></div>
-                </c:forEach>
+                    <c:forEach var="item" items="${itemCollection}">
+                        <h6>
+                            <a class="item-link" href="item-bid-list?id="${item.id} style="height: 30px;">
+                                <div class="row top-spaced">
+                                    <div class="col-1"></div>
+                                    <div class="col-8">${item.description}</div>
+                                    <div class="col-2" style="text-align: right;">${item.initialAmount}</div>
+                                </div>
+                            </a>
+                        </h6>
+                        <hr />
+                    </c:forEach>
+                </div>                
             </div>
             <div clas="row" style="margin-top: 0.5rem;">
                 <div class="col-12 footer">
