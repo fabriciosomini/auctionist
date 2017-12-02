@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author fabri
  */
-@WebServlet(urlPatterns = {"/save-item", "/create"})
+@WebServlet(urlPatterns = {"/save-item", "/create-item","/delete-item" })
 public class ItemController extends HttpServlet {
 
     /**
@@ -37,7 +37,7 @@ public class ItemController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ItemController</title>");            
+            out.println("<title>Servlet ItemController</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet ItemController at " + request.getContextPath() + "</h1>");
@@ -72,7 +72,14 @@ public class ItemController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+
+        String routePath = request.getServletPath();
+
+        if (routePath.endsWith("/create")) {
+
+            
+        }
+
     }
 
     /**

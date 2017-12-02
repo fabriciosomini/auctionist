@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author fabri
  */
 
-@WebServlet(urlPatterns = {"/save-bid"})
+@WebServlet(urlPatterns = {"/save-bid", "/update-bid", "/delete-bid"})
 public class BidController extends HttpServlet {
 
     /**
