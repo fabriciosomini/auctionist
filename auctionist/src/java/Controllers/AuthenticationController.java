@@ -21,7 +21,11 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author fabri
  */
-@WebServlet(urlPatterns = {"/signin-submit", "/login"})
+@WebServlet(urlPatterns = {
+    "/signin", 
+    "/login",
+    "/signout"
+})
 public class AuthenticationController extends HttpServlet {
 
   
@@ -57,7 +61,7 @@ public class AuthenticationController extends HttpServlet {
 
         String routePath = request.getServletPath();
 
-        if (routePath.endsWith("/signin-submit")) {
+        if (routePath.endsWith("/signin")) {
 
             String username = (String) request.getParameter("txtLogin");
             String password = (String) request.getParameter("txtPass");
@@ -91,6 +95,12 @@ public class AuthenticationController extends HttpServlet {
 
             }
 
+        }else if(routePath.contains("/signout")){
+            
+            BidderSingleton.Get().setBidder(null);
+            response.sendRedirect("login");
+            //request.getSession().invalidate();
+            
         }
     }
 
