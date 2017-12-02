@@ -26,10 +26,10 @@ import javax.servlet.http.HttpServletResponse;
  * @author fabri
  */
 @WebServlet(urlPatterns = {
-    "/save-item", 
-    "/create-item", 
-    "/delete-item", 
-    "/list-item", 
+    "/save-item",
+    "/create-item",
+    "/delete-item",
+    "/list-item",
     "/list-bids",
     "/add-bid"
 })
@@ -54,23 +54,24 @@ public class ItemController extends HttpServlet {
             request.setAttribute("itemCollection", ItemRepository.Get().GetItemList(auth));
             request.getRequestDispatcher("/index.jsp").forward(request, response);
         } else if (routePath.contains("/list-bids")) {
+
             String id = (String) request.getParameter("id");
             Item item = ItemRepository.Get().GetItem(auth, id);
             request.setAttribute("currentItem", item);
             if (item.getOwnerId().equals(BidderSingleton.Get().getBidder().getToken())) {
-                    request.setAttribute("isOwner", true);
-                } else {
-                    request.setAttribute("isOwner", false);
-                }           
+                request.setAttribute("isOwner", true);
+            } else {
+                request.setAttribute("isOwner", false);
+            }
             request.getRequestDispatcher("/item-bid-list.jsp").forward(request, response);
+
         } else if (routePath.endsWith("/create-item")) {
             request.getRequestDispatcher("/create-item.jsp").forward(request, response);
-        }
-        else if (routePath.contains("/delete-item")) {
-             String id = (String) request.getParameter("id");
+        } else if (routePath.contains("/delete-item")) {
+            String id = (String) request.getParameter("id");
             Item item = ItemRepository.Get().GetItem(auth, id);
             ItemRepository.Get().DeleteItem(auth, item.getKey());
-             response.sendRedirect("list-item");
+            response.sendRedirect("list-item");
         }
 
     }
@@ -107,6 +108,26 @@ public class ItemController extends HttpServlet {
             ItemRepository.Get().Save(auth, item);
 
             response.sendRedirect("list-item");
+        } else if (routePath.contains("/add-bid")) {
+
+            String id = (String) request.getParameter("id");
+            Item item = ItemRepository.Get().GetItem(auth, id);
+            float bidAmount = Float.valueOf(request.getParameter("txtBidValue"));
+
+            String description = request.getParameter("itemDescription");
+
+            Bid bid = new Bid();
+            bid.setBidder(BidderSingleton.Get().getBidder());
+            bid.setBidAmount(0);
+            bid.setBidAmount(bidAmount);
+
+            item.addBid(bid);
+
+            ItemRepository.Get().UpdateItem(auth, item);
+             response.sendRedirect("list-bids?id="+ id);
+            
+            
+        
         }
     }
 
