@@ -12,6 +12,11 @@ package Models;
 public class Bidder {
     private String name;
     private String id;
+    private String idToken;
+
+    public String getIdToken() {
+        return idToken;
+    }
 
     public String getName() {
         return name;
@@ -27,5 +32,9 @@ public class Bidder {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public void setToken(String idToken) {
+        this.idToken = idToken;
     }
 }

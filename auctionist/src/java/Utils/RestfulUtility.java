@@ -7,19 +7,25 @@ package Utils;
 
 import Models.AuthenticationResponse;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
+import java.lang.reflect.Type;
 import java.security.InvalidParameterException;
+import java.util.ArrayList;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.methods.HttpPut;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.message.BasicHeader;
 import org.apache.http.protocol.HTTP;
+
 
 /**
  *
@@ -27,15 +33,17 @@ import org.apache.http.protocol.HTTP;
  */
 public class RestfulUtility {
 
-    
- 
+    public static Object post(String uri, Object object, Class expectedReponse) throws UnsupportedEncodingException, IOException {
 
-    public static  Object post(String uri, Object object, Class expectedReponse) throws UnsupportedEncodingException, IOException {
-        Object responseObject;
-        
+        return post("", uri, object, expectedReponse);
+    }
+
+    public static Object post(String auth, String uri, Object object, Class expectedReponse) throws UnsupportedEncodingException, IOException {
+        Object responseObject = null;
+
         if (uri != null) {
             HttpClient client = HttpClientBuilder.create().build();
-            HttpPost httpRequest = new HttpPost(uri);
+            HttpPost httpRequest = new HttpPost(uri + auth);
 
             Gson toGson = new Gson();
             String jsonBody = toGson.toJson(object);
@@ -48,15 +56,20 @@ public class RestfulUtility {
             HttpResponse httpResponse;
             httpResponse = client.execute((HttpUriRequest) httpRequest);
 
-            BufferedReader rd = new BufferedReader(new InputStreamReader(httpResponse.getEntity().getContent()));
-            String line;
-            String json = "";
-            while ((line = rd.readLine()) != null) {
-                json += line;
-            }
+            if (httpResponse.getStatusLine().getStatusCode() == 200) {
+                BufferedReader rd = new BufferedReader(new InputStreamReader(httpResponse.getEntity().getContent()));
+                String line;
+                String json = "";
+                while ((line = rd.readLine()) != null) {
+                    json += line;
+                }
 
-            Gson gson = new Gson();
-            responseObject = gson.fromJson(json, expectedReponse);
+              if(json!=null){
+                
+                Gson gson = new Gson();
+                responseObject = gson.fromJson(json, expectedReponse);
+                }
+            }
 
         } else {
             throw new InvalidParameterException("Parâmetro Uri não pode ser nulo");
@@ -64,13 +77,13 @@ public class RestfulUtility {
 
         return responseObject;
     }
-    
-     public static  Object put(String uri, Object object, Class expectedReponse) throws UnsupportedEncodingException, IOException {
-        Object responseObject;
-        
+
+    public static Object put(String auth, String uri, Object object, Class expectedReponse) throws UnsupportedEncodingException, IOException {
+        Object responseObject= null;
+
         if (uri != null) {
             HttpClient client = HttpClientBuilder.create().build();
-            HttpPost httpRequest = new HttpPost(uri);
+            HttpPut httpRequest = new HttpPut(uri + auth);
 
             Gson toGson = new Gson();
             String jsonBody = toGson.toJson(object);
@@ -82,16 +95,55 @@ public class RestfulUtility {
             httpRequest.addHeader("content-type", "application/json");
             HttpResponse httpResponse;
             httpResponse = client.execute((HttpUriRequest) httpRequest);
+            if (httpResponse.getStatusLine().getStatusCode() == 200) {
+                BufferedReader rd = new BufferedReader(new InputStreamReader(httpResponse.getEntity().getContent()));
+                String line;
+                String json = "";
+                while ((line = rd.readLine()) != null) {
+                    json += line;
+                }
 
-            BufferedReader rd = new BufferedReader(new InputStreamReader(httpResponse.getEntity().getContent()));
-            String line;
-            String json = "";
-            while ((line = rd.readLine()) != null) {
-                json += line;
+               if(json!=null){
+                
+                Gson gson = new Gson();
+                responseObject = gson.fromJson(json, expectedReponse);
+                }
             }
 
-            Gson gson = new Gson();
-            responseObject = gson.fromJson(json, expectedReponse);
+        } else {
+            throw new InvalidParameterException("Parâmetro Uri não pode ser nulo");
+        }
+
+        return responseObject;
+    }
+
+    public static Object get(String auth, String uri, Type expectedReponse) throws IOException {
+        Object responseObject = null;
+
+        if (uri != null) {
+            HttpClient client = HttpClientBuilder.create().build();
+            HttpGet httpRequest = new HttpGet(uri + auth);
+
+            httpRequest.addHeader("content-type", "application/json");
+            HttpResponse httpResponse;
+            httpResponse = client.execute((HttpUriRequest) httpRequest);
+
+            if (httpResponse.getStatusLine().getStatusCode() == 200) {
+                BufferedReader rd = new BufferedReader(new InputStreamReader(httpResponse.getEntity().getContent()));
+                String line;
+                String json = "";
+                while ((line = rd.readLine()) != null) {
+                    json += line;
+                }
+
+                if(json!=null){
+                
+                Gson gson = new Gson();
+                responseObject = gson.fromJson(json, expectedReponse);
+                }
+      
+
+            }
 
         } else {
             throw new InvalidParameterException("Parâmetro Uri não pode ser nulo");

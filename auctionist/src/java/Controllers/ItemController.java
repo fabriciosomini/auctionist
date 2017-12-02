@@ -39,18 +39,21 @@ public class ItemController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        String auth = (String)request.getSession().getAttribute("IDTOKEN");
         String routePath = request.getServletPath();
         if (routePath.endsWith("/list-item")) {
-            request.setAttribute("itemCollection", generateData());
+            request.setAttribute("itemCollection", ItemRepository.Get().GetItemList(auth));
             request.getRequestDispatcher("/index.jsp").forward(request, response);
         } else if (routePath.endsWith("/item-bid-list")) {
             String id = (String)request.getParameter("id");
-            request.setAttribute("currentItem", ItemRepository.Get().GetItem(id));
+            
+            
+            request.setAttribute("currentItem", ItemRepository.Get().GetItem(auth, id));
             request.getRequestDispatcher("/item-bid-list.jsp").forward(request, response);
         }
     }
 
-     private List<Item> generateData() {
+    /* private List<Item> generateData() {
 
         float initialBid = (float) Math.random();
         List<Item> items = new ArrayList();
@@ -80,7 +83,7 @@ public class ItemController extends HttpServlet {
 
         return items;
 
-    }
+    }*/
 
     /**
      * Handles the HTTP <code>POST</code> method.

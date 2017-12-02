@@ -6,6 +6,8 @@
 package Controllers;
 
 import Models.AuthenticationResponse;
+import Models.Bidder;
+import Repository.BidderSingleton;
 import Utils.AuthenticationUtility;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -69,7 +71,16 @@ public class AuthenticationController extends HttpServlet {
 
                         request.getSession().setAttribute("IDTOKEN", authentication.getIdToken());
                         request.getSession().setAttribute("signInResult", null);
+                        
+                        Bidder bidder = new Bidder();
+                        bidder.setId(authentication.getLocalId());
+                        bidder.setName(authentication.getEmail());
+                        bidder.setToken(authentication.getIdToken());
+                        
+                        BidderSingleton.Get().setBidder(bidder);
                         response.sendRedirect("list-item");
+                        
+                        
 
                     } else {
                         

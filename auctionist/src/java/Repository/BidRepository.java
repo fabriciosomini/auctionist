@@ -27,44 +27,44 @@ public class BidRepository {
         return bidRepository;
     }
 
-    public Bid GetBid(int id) {
+    public Bid GetBid(String auth, int id) {
 
         return null;
     }
 
-    public List<Bid> GetBidList(String selector) {
+    public List<Bid> GetBidList(String auth) {
         List<Bid> bidList = new ArrayList<>();
 
         return bidList;
     }
 
-    public List<Bid> Search(String type, String name) {
+    public List<Bid> Search(String auth, String type, String name) {
         List<Bid> bidList;
 
-        bidList = GetBidList("");
+        bidList = GetBidList(auth);
         return bidList;
     }
 
-    public int DeleteBid(int id) {
+    public int DeleteBid(String auth, int id) {
         
         return 0;
     }
 
-    public Bid Save(Bid bid) throws IOException {
+    public Bid Save(String auth, Bid bid) throws IOException {
         if (bid.getId() != null) {
-            return InsertBid(bid);
+            return InsertBid(auth, bid);
         } else {
-            return UpdateBid(bid);
+            return UpdateBid(auth, bid);
         }
     }
 
-    private Bid InsertBid(Bid bid) throws IOException {
+    private Bid InsertBid(String auth, Bid bid) throws IOException {
 
         return (Bid) RestfulUtility.post(bidUrl, bid, Bid.class);
 
     }
 
-    private Bid UpdateBid(Bid bid) throws IOException {
-        return (Bid) RestfulUtility.put(bidUrl, bid, Bid.class);
+    private Bid UpdateBid(String auth, Bid bid) throws IOException {
+        return (Bid) RestfulUtility.put(auth, bidUrl, bid, Bid.class);
     }
 }
