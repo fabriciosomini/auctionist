@@ -64,6 +64,7 @@
                             <div class="col-2"></div>
                             <div class="col-2">
                                 <input type="number" class="form-control" placeholder="Valor" name="txtBidValue" />
+                                <p>${bidResult}</p>
                             </div>
                             <div class="col-2">
                                 <input type="submit" class="form-control btn btn-block btn-primary" value="Dar um lance" />
