@@ -60,27 +60,8 @@ public class ItemController extends HttpServlet {
         String routePath = request.getServletPath();
         if (routePath.contains("/list-item")) {
 
-            String search = (String) request.getParameter("search");
-    
             List<Item> items = ItemRepository.Get().GetItemList(auth);
 
-            if (search != null) {
-
-                items = items.stream()
-                        .filter(
-                                i -> i.getName()
-                                        .toLowerCase()
-                                        .contains(search.toLowerCase()) ||   
-                                        i.getDescription()
-                                        .toLowerCase()
-                                        .contains(search.toLowerCase())
-                        ).collect(Collectors.toList());
-            }
-            else
-            {
-                   
-            request.removeAttribute("search");
-            }
             //Reseta a mensagem de lance 
             request.getSession().setAttribute("bidResult", null);
 
@@ -142,7 +123,33 @@ public class ItemController extends HttpServlet {
         String routePath = request.getServletPath();
         String auth = BidderSingleton.Get().getBidder().getAuthToken();
 
-        if (routePath.endsWith("/save-item")) {
+        if (routePath.contains("/list-item")) {
+            
+        String search = (String) request.getParameter("search");
+         List<Item> items = ItemRepository.Get().GetItemList(auth);
+
+            if (search != null) {
+
+                items = items.stream()
+                        .filter(
+                                i -> i.getName()
+                                        .toLowerCase()
+                                        .contains(search.toLowerCase()) ||   
+                                        i.getDescription()
+                                        .toLowerCase()
+                                        .contains(search.toLowerCase())
+                        ).collect(Collectors.toList());
+            }
+            
+            request.getSession().setAttribute("bidResult", null);
+
+            request.setAttribute("itemCollection", items);
+
+            //response.setIntHeader("Refresh", 1);
+            request.getRequestDispatcher("/index.jsp").forward(request, response);
+           
+        }
+        else if (routePath.endsWith("/save-item")) {
 
             String id = UUID.randomUUID().toString();
             String name = request.getParameter("itemName");

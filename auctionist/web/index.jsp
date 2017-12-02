@@ -47,7 +47,7 @@
                         </div>
                         <div class="col-1"></div>
                     </div>
-                    <form method="GET" action="list-item">
+                    <form method="POST" action="list-item">
                          <div class="row" style="margin-bottom: 1rem;">
                         <div class="col-7"></div>
                         <div class="col-3">
