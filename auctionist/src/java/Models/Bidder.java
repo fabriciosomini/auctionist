@@ -12,10 +12,10 @@ package Models;
 public class Bidder {
     private String name;
     private String id;
-    private String idToken;
+    private String token;
 
-    public String getIdToken() {
-        return idToken;
+    public String getToken() {
+        return token;
     }
 
     public String getName() {
@@ -35,6 +35,6 @@ public class Bidder {
     }
 
     public void setToken(String idToken) {
-        this.idToken = idToken;
+        this.token = idToken;
     }
 }

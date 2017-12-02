@@ -50,17 +50,12 @@ public class ItemController extends HttpServlet {
             String id = (String) request.getParameter("id");
             Item item = ItemRepository.Get().GetItem(auth, id);
             request.setAttribute("currentItem", item);
-
-            if (item.getOwnerId() != null) {
-                if (item.getOwnerId().equals(BidderSingleton.Get().getBidder().getIdToken())) {
+            if (item.getOwnerId().equals(BidderSingleton.Get().getBidder().getToken())) {
                     request.setAttribute("isOwner", true);
                 } else {
                     request.setAttribute("isOwner", false);
                 }
-            } else {
-                request.setAttribute("isOwner", false);
-            }
-
+            
             request.getRequestDispatcher("/item-bid-list.jsp").forward(request, response);
         } else if (routePath.endsWith("/create-item")) {
             request.getRequestDispatcher("/create-item.jsp").forward(request, response);
@@ -95,7 +90,7 @@ public class ItemController extends HttpServlet {
             item.setName(name);
             item.setDescription(description);
             item.setInitialAmount(initialAmount);
-            item.setOwnerId(BidderSingleton.Get().getBidder().getIdToken());
+            item.setOwnerId(BidderSingleton.Get().getBidder().getToken());
 
             ItemRepository.Get().Save(auth, item);
 

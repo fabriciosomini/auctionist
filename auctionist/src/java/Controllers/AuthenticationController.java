@@ -75,7 +75,7 @@ public class AuthenticationController extends HttpServlet {
                         Bidder bidder = new Bidder();
                         bidder.setId(authentication.getLocalId());
                         bidder.setName(authentication.getEmail());
-                        bidder.setToken(authentication.getIdToken());
+                        bidder.setToken(authentication.getLocalId());
                         
                         BidderSingleton.Get().setBidder(bidder);
                         response.sendRedirect("list-item");
