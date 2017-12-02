@@ -10,6 +10,7 @@ import Models.Bidder;
 import Models.Item;
 import Repository.BidderSingleton;
 import Repository.ItemRepository;
+import Utils.AuthenticationUtility;
 import Utils.RestfulUtility;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -49,7 +50,12 @@ public class ItemController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        String auth = (String) request.getSession().getAttribute("IDTOKEN");
+        if(!AuthenticationUtility.IsAuthenticated()){
+            response.sendRedirect("/auctionist");
+            return;
+        }
+        
+        String auth = (String) BidderSingleton.Get().getBidder().getAuthToken();
         String routePath = request.getServletPath();
         if (routePath.endsWith("/list-item")) {
 
@@ -59,7 +65,7 @@ public class ItemController extends HttpServlet {
             List<Item> items = ItemRepository.Get().GetItemList(auth);
             request.setAttribute("itemCollection", items);
             
-            response.setIntHeader("Refresh", 1);
+            //response.setIntHeader("Refresh", 1);
             request.getRequestDispatcher("/index.jsp").forward(request, response);
 
         } else if (routePath.contains("/list-bids")) {
@@ -69,13 +75,13 @@ public class ItemController extends HttpServlet {
             Collections.reverse(item.getBids());
            
             request.setAttribute("currentItem", item);
-            if (item.getOwnerId().equals(BidderSingleton.Get().getBidder().getToken())) {
+            if (item.getOwnerId().equals(BidderSingleton.Get().getBidder().getUserId())) {
                 request.setAttribute("isOwner", true);
             } else {
                 request.setAttribute("isOwner", false);
             }
             
-            response.setIntHeader("Refresh", 1);
+           // response.setIntHeader("Refresh", 1);
             request.getRequestDispatcher("/item-bid-list.jsp").forward(request, response);
 
         } else if (routePath.endsWith("/create-item")) {
@@ -106,9 +112,14 @@ public class ItemController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+ 
+        if(!AuthenticationUtility.IsAuthenticated()){
+            response.sendRedirect("/auctionist");
+            return;
+        }
+ 
         String routePath = request.getServletPath();
-        String auth = (String) request.getSession().getAttribute("IDTOKEN");
+        String auth = BidderSingleton.Get().getBidder().getAuthToken();
 
         if (routePath.endsWith("/save-item")) {
 
@@ -122,7 +133,7 @@ public class ItemController extends HttpServlet {
             item.setName(name);
             item.setDescription(description);
             item.setInitialAmount(initialAmount);
-            item.setOwnerId(BidderSingleton.Get().getBidder().getToken());
+            item.setOwnerId(BidderSingleton.Get().getBidder().getUserId());
 
             ItemRepository.Get().Save(auth, item);
 

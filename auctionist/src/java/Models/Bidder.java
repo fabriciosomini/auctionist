@@ -11,11 +11,11 @@ package Models;
  */
 public class Bidder extends BaseObject{
     private String name;
-    private String id;
-    private String token;
+    private String authToken;
+    private String userId;
 
-    public String getToken() {
-        return token;
+    public String getUserId() {
+        return userId;
     }
 
     public String getName() {
@@ -26,15 +26,15 @@ public class Bidder extends BaseObject{
         this.name = name;
     }
 
-    public String getId() {
-        return id;
+    public String getAuthToken() {
+        return authToken;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setAuthToken(String id) {
+        this.authToken = id;
     }
 
-    public void setToken(String idToken) {
-        this.token = idToken;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 }

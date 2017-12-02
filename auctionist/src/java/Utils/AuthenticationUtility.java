@@ -7,12 +7,14 @@ package Utils;
 
 import Models.AuthenticationRequest;
 import Models.AuthenticationResponse;
+import Repository.BidderSingleton;
 import com.google.gson.Gson;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
+import javax.security.sasl.AuthenticationException;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.CredentialsProvider;
 import org.apache.http.client.HttpClient;
@@ -50,5 +52,24 @@ public class AuthenticationUtility {
                         AuthenticationResponse.class);
 
         return authenticationResponse;
+    }
+    
+    public static boolean IsAuthenticated() throws IOException{
+    
+          String itemUrl = "https://auctionist-f4888.firebaseio.com/Auth.json?auth=";
+     
+        
+          try{
+           RestfulUtility.get(
+                        BidderSingleton.Get().getBidder().getAuthToken(),
+                        itemUrl,
+                        Object.class);
+          }catch(AuthenticationException ex){
+              
+              return false;
+          }
+       
+        
+       return true;
     }
 }

@@ -40,9 +40,18 @@ public class AuthenticationController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        
+       
+        String routePath = request.getServletPath();
+
+        if (routePath.endsWith("/auctionist")) {
+ 
+               BidderSingleton.Get().setBidder(new Bidder());
+              request.getSession().invalidate();
+        }
+         
         request.getRequestDispatcher("/login.jsp").forward(request, response);
+        
+        
     }
 
     /**
@@ -64,7 +73,7 @@ public class AuthenticationController extends HttpServlet {
             String username = (String) request.getParameter("txtLogin");
             String password = (String) request.getParameter("txtPass");
             String signInBtn = (String) request.getParameter("btnLogin");
-            String signOutbtnLoginBtn = (String) request.getParameter("btnLogout");
+           
 
             if (signInBtn!=null && username != null && password != null) {
                 AuthenticationResponse authentication
@@ -73,13 +82,13 @@ public class AuthenticationController extends HttpServlet {
                 if (authentication != null) {
                     if (authentication.isRegistered()) {
 
-                        request.getSession().setAttribute("IDTOKEN", authentication.getIdToken());
+                
                         request.getSession().setAttribute("signInResult", null);
                         
                         Bidder bidder = new Bidder();
-                        bidder.setId(authentication.getLocalId());
+                        bidder.setAuthToken(authentication.getIdToken()); 
                         bidder.setName(authentication.getEmail());
-                        bidder.setToken(authentication.getLocalId());
+                        bidder.setUserId(authentication.getLocalId());
                         
                         BidderSingleton.Get().setBidder(bidder);
                         response.sendRedirect("list-item");
@@ -89,21 +98,13 @@ public class AuthenticationController extends HttpServlet {
                     } 
                 }else {
                         
-                        request.getSession().setAttribute("signInResult", "Usuário ou senha incorretos");
+                     request.getSession().setAttribute("signInResult", "Usuário ou senha incorretos");
                      response.sendRedirect("/auctionist");
-                       
-                        //  request.getRequestDispatcher("login.jsp").forward(request, response);
+                 
                     }
 
             }
-            else if(signOutbtnLoginBtn!=null)
-            {
-               request.getSession().setAttribute("IDTOKEN", null);
-               BidderSingleton.Get().setBidder(null);
-               request.getSession().invalidate();
-
-               response.sendRedirect("/auctionist");
-            }
+            
             
            
 

@@ -43,7 +43,7 @@ public class RestfulUtility {
         return post("", uri, object, expectedReponse);
     }
 
-    public static Object post(String auth, String uri, Object object, Class expectedReponse) throws UnsupportedEncodingException, IOException {
+    public static Object post(String auth, String uri, Object object, Class expectedReponse) throws UnsupportedEncodingException,AuthenticationException, IOException {
         Object responseObject = null;
 
         if (uri != null) {
@@ -86,7 +86,8 @@ public class RestfulUtility {
         return responseObject;
     }
 
-    public static Object put(String auth, String uri, Object object, Class expectedReponse) throws UnsupportedEncodingException, IOException {
+    public static Object put(String auth, String uri, Object object, Class expectedReponse) 
+            throws UnsupportedEncodingException, IOException,AuthenticationException {
         Object responseObject = null;
 
         if (uri != null) {
@@ -128,7 +129,9 @@ public class RestfulUtility {
         return responseObject;
     }
 
-    public static boolean delete(String auth, String uri) throws UnsupportedEncodingException, IOException {
+    public static boolean delete(String auth, String uri) throws UnsupportedEncodingException,
+            IOException,
+            AuthenticationException{
         boolean responseObject = false;
 
         if (uri != null) {
@@ -156,7 +159,8 @@ public class RestfulUtility {
        
     }
 
-    public static Object get(String auth, String uri, Class expectedReponse) throws IOException {
+    public static Object get(String auth, String uri, Class expectedReponse) throws IOException, 
+            AuthenticationException {
         Object responseObject = null;
 
         if (uri != null) {

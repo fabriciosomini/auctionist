@@ -13,6 +13,7 @@ import Models.Bidder;
  */
 public class BidderSingleton {
      private static final BidderSingleton BIDDER_SINGLETON = new BidderSingleton();
+    
      public static BidderSingleton Get() {
          return BIDDER_SINGLETON;
      }
