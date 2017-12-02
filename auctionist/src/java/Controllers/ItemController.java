@@ -5,6 +5,8 @@
  */
 package Controllers;
 
+import Models.Bid;
+import Models.Bidder;
 import Models.Item;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -20,7 +22,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author fabri
  */
-@WebServlet(urlPatterns = {"/save-item", "/create-item", "/delete-item", "/list-item" })
+@WebServlet(urlPatterns = {"/save-item", "/create-item", "/delete-item", "/list-item"})
 public class ItemController extends HttpServlet {
 
     /**
@@ -55,40 +57,40 @@ public class ItemController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-          
-        Item item1 = new Item();
-        item1.setDescription("CARRO VELHO");
-        item1.setId("1");
-        item1.setInitialAmount(2500);
+
         
-          Item item2 = new Item();
-        item2.setDescription("CASA CAINDO AOS PEDAÇOS");
-        item2.setId("1");
-        item2.setInitialAmount(7570);
+        request.setAttribute("itemCollection", generateData());
+    }
+
+    private List<Item> generateData() {
+
+        float initialBid  = (float) Math.random();
+        List<Item> items = new ArrayList();
+        for (int itemIndex = 0; itemIndex < 50; itemIndex++) {
+
+            List<Bid> bids = new ArrayList();
+            for (int i = 0; i < 120; i++) {
+                Bidder bidder = new Bidder();
+                bidder.setId(String.valueOf(i));
+                bidder.setName("Leiloante " + Math.random());
+                Bid bid = new Bid();
+                bid.setBidAmount(initialBid);
+                bid.setBidder(bidder);
+                bids.add(bid);
+                
+                initialBid += 150; 
+
+            }
+            Item item = new Item();
+            item.setDescription("Item " + String.valueOf(Math.random()));
+            item.setInitialAmount(initialBid);
+            bids.stream().forEach(p -> item.addBid(p));
+            items.add(item);
+
+        }
         
-          Item item3 = new Item();
-        item3.setDescription("ROUPA USADA");
-        item3.setId("1");
-        item3.setInitialAmount(425);
-        
-          Item item4 = new Item();
-        item4.setDescription("FILHOS SUJOS");
-        item4.setId("1");
-        item4.setInitialAmount(100);
-        
-          Item item5 = new Item();
-        item5.setDescription("MARIDO BROXA");
-        item5.setId("1");
-        item5.setInitialAmount(12);
-        
-        List<Item> itemList = new  ArrayList();
-        itemList.add(item1);
-        itemList.add(item2);
-        itemList.add(item3);
-        itemList.add(item4);
-        itemList.add(item5);
-        //request.setAttribute("itemCollection", ItemRepository.Get().GetItemList(""));
-        request.setAttribute("itemCollection", itemList);
+        return items;
+
     }
 
     /**

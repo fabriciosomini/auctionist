@@ -47,7 +47,7 @@
                                 <div class="row top-spaced">
                                     <div class="col-1"></div>
                                     <div class="col-8">${item.description}</div>
-                                    <div class="col-2" style="text-align: right;">${item.initialAmount}</div>
+                                    <div class="col-2" style="text-align: right;">${item.highestBid}</div>
                                 </div>
                             </a>
                         </h6>

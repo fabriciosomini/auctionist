@@ -7,10 +7,16 @@ package Models;
 
 public class Bid {
 
-    
+    private Bidder bidder;
     private String id;
-    private Item item;
     private float bidAmount;
+    
+    public Bidder getBidder() {
+        return bidder;
+    }
+    public void setBidder(Bidder bidder) {
+        this.bidder = bidder;
+    }
 
     public String getId() {
         return id;
@@ -20,13 +26,7 @@ public class Bid {
         this.id = id;
     }
 
-    public Item getItem() {
-        return item;
-    }
-
-    public void setItem(Item item) {
-        this.item = item;
-    }
+   
 
     public float getBidAmount() {
         return bidAmount;
