@@ -39,12 +39,12 @@
                     <div class="row top-spaced" style="margin-bottom: 2rem;">
                         <div class="col-1"></div>
                         <div class="col-1" style="text-align: right;">
-                            <c:if test="${item.isOwner == true}">
-                                <h4><a href="delete-item" style="color: red;">X</a>
+                            <c:if test="${isOwner == true}">
+                                <h4><a href="delete-item" style="color: red;">X</a><h4>
                             </c:if>
                         </div>
                         <div class="col-5">
-                            </h4><h3>${currentItem.name}</h3>
+                            <h3>${currentItem.name}</h3>
                         </div>
                         <!--<div class="col-3" style="text-align: right;">
                             <h5>Imagem (se tiver)</h5>
@@ -59,10 +59,10 @@
                     <form method="POST" action="item-new-bid">
                         <div class="row top-spaced">
                             <div class="col-2"></div>                        
-                            <div class="col-2">                           
+                            <div class="col-3">                           
                                 <h6>Maior lance: R$ ${currentItem.highestBid}</h6>
                             </div>
-                            <div class="col-3"></div>
+                            <div class="col-2"></div>
                             <div class="col-2">
                                 <input type="number" class="form-control" placeholder="Valor" name="txtBidValue" />
                             </div>
