@@ -39,7 +39,9 @@
                 <!-- ITEM CONTAINER -->
                 <div class="col-12">
                     <div class="row">
-                       
+                       <div class="col-1">
+                            <a href="list-item"><img src="imgs/Refresh_icon.png" alt=""/></a>
+                        </div>
                         <div class="col-10" style="text-align: center; margin-bottom: 1rem;">
                             <h4>Lista de Leilões</h4>
                         </div>
