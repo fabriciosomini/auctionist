@@ -37,7 +37,7 @@
                         <div class="col-1"></div>
                         <div class="col-1" style="text-align: right;">
                             <c:if test="${isOwner == true}">
-                                <h4><a href="delete-item" style="color: red;">X</a></h4>
+                                <h4><a href="delete-item?id=${currentItem.id}" style="color: red;">X</a></h4>
                             </c:if>
                         </div>
                         <div class="col-5">
@@ -53,7 +53,7 @@
                             <h6>Lance inicial: R$ ${currentItem.initialAmount}</h6>
                         </div>
                     </div>
-                    <form method="POST" action="item-new-bid">
+                    <form method="POST" action="add-bid">
                         <div class="row top-spaced">
                             <div class="col-2"></div>                        
                             <div class="col-3">                           

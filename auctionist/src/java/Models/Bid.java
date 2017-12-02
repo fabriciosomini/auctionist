@@ -5,8 +5,8 @@
  */
 package Models;
 
-public class Bid {
-
+public class Bid extends BaseObject {
+ 
     private Bidder bidder;
     private String id;
     private float bidAmount;

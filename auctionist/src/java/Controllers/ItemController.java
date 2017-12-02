@@ -25,7 +25,14 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author fabri
  */
-@WebServlet(urlPatterns = {"/save-item", "/create-item", "/delete-item", "/list-item", "/item-bid-list"})
+@WebServlet(urlPatterns = {
+    "/save-item", 
+    "/create-item", 
+    "/delete-item", 
+    "/list-item", 
+    "/list-bids",
+    "/add-bid"
+})
 public class ItemController extends HttpServlet {
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -46,7 +53,7 @@ public class ItemController extends HttpServlet {
         if (routePath.endsWith("/list-item")) {
             request.setAttribute("itemCollection", ItemRepository.Get().GetItemList(auth));
             request.getRequestDispatcher("/index.jsp").forward(request, response);
-        } else if (routePath.endsWith("/item-bid-list")) {
+        } else if (routePath.contains("/list-bids")) {
             String id = (String) request.getParameter("id");
             Item item = ItemRepository.Get().GetItem(auth, id);
             request.setAttribute("currentItem", item);
@@ -54,11 +61,16 @@ public class ItemController extends HttpServlet {
                     request.setAttribute("isOwner", true);
                 } else {
                     request.setAttribute("isOwner", false);
-                }
-            
+                }           
             request.getRequestDispatcher("/item-bid-list.jsp").forward(request, response);
         } else if (routePath.endsWith("/create-item")) {
             request.getRequestDispatcher("/create-item.jsp").forward(request, response);
+        }
+        else if (routePath.contains("/delete-item")) {
+             String id = (String) request.getParameter("id");
+            Item item = ItemRepository.Get().GetItem(auth, id);
+            ItemRepository.Get().DeleteItem(auth, item.getKey());
+             response.sendRedirect("list-item");
         }
 
     }

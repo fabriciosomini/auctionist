@@ -12,10 +12,6 @@
         <servlet-name>ItemController</servlet-name>
         <servlet-class>Controllers.ItemController</servlet-class>
     </servlet>
-    <servlet>
-        <servlet-name>BidController</servlet-name>
-        <servlet-class>Controllers.BidController</servlet-class>
-    </servlet>
     <servlet-mapping>
         <servlet-name>AuctionController</servlet-name>
         <url-pattern>/AuctionController</url-pattern>
@@ -27,10 +23,6 @@
     <servlet-mapping>
         <servlet-name>ItemController</servlet-name>
         <url-pattern>/ItemController</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>BidController</servlet-name>
-        <url-pattern>/BidController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -12,9 +12,10 @@ import java.util.List;
  *
  * @author fabri
  */
-public class Item {
+public class Item extends BaseObject{
    
     private String id;
+ 
     private String ownerId;
     private String name;
     private String description;

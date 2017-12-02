@@ -25,7 +25,8 @@ import java.util.stream.Stream;
  */
 public class ItemRepository {
 
-    private String itemUrl = "https://auctionist-f4888.firebaseio.com/Item.json?auth=";
+    private String itemUrl = "https://auctionist-f4888.firebaseio.com/Item";
+    private String authString = ".json?auth=";
     private static final ItemRepository itemRepository = new ItemRepository();
 
     public static ItemRepository Get() {
@@ -50,7 +51,7 @@ public class ItemRepository {
        
        
          try{
-           itemList = (List<Item>)RestfulUtility.get(auth, itemUrl, Item.class);
+           itemList = (List<Item>)RestfulUtility.get(auth, itemUrl + authString, Item.class);
          }catch(IOException ex){}
         
        
@@ -65,22 +66,18 @@ public class ItemRepository {
         return itemList;
     }
 
-    public int DeleteItem(String auth, int id) {
+    public Object DeleteItem(String auth, String key) throws IOException {
         
-        return 0;
+        return RestfulUtility.delete(auth,itemUrl + "/" + key  + authString);
     }
 
     public Item Save(String auth, Item item) throws IOException {
-      return InsertItem(auth, item);
+      return (Item) RestfulUtility.post(auth, itemUrl+authString , item, Item.class);
     }
 
-    private Item InsertItem(String auth, Item item) throws IOException {
-
-        return (Item) RestfulUtility.post(auth, itemUrl, item, Item.class);
-
-    }
+   
 
     private Item UpdateItem(String auth, Item item) throws IOException {
-        return (Item) RestfulUtility.put(auth, itemUrl, item, Item.class);
+        return (Item) RestfulUtility.put(auth, itemUrl+authString , item, Item.class);
     }
 }

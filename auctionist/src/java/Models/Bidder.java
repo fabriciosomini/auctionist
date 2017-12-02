@@ -9,7 +9,7 @@ package Models;
  *
  * @author fabri
  */
-public class Bidder {
+public class Bidder extends BaseObject{
     private String name;
     private String id;
     private String token;

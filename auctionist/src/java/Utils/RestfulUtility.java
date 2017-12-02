@@ -6,6 +6,7 @@
 package Utils;
 
 import Models.AuthenticationResponse;
+import Models.BaseObject;
 import com.google.gson.Gson;
 import com.google.gson.internal.LinkedTreeMap;
 import com.google.gson.reflect.TypeToken;
@@ -20,6 +21,7 @@ import java.util.List;
 import java.util.Map.Entry;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpDelete;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpPut;
@@ -119,6 +121,38 @@ public class RestfulUtility {
         return responseObject;
     }
 
+    public static Object delete(String auth, String uri) throws UnsupportedEncodingException, IOException {
+        Object responseObject = null;
+
+        if (uri != null) {
+            HttpClient client = HttpClientBuilder.create().build();
+            HttpDelete httpRequest = new HttpDelete(uri + auth);
+
+            httpRequest.addHeader("content-type", "application/json");
+            HttpResponse httpResponse;
+            httpResponse = client.execute((HttpUriRequest) httpRequest);
+            if (httpResponse.getStatusLine().getStatusCode() == 200) {
+                BufferedReader rd = new BufferedReader(new InputStreamReader(httpResponse.getEntity().getContent()));
+                String line;
+                String json = "";
+                while ((line = rd.readLine()) != null) {
+                    json += line;
+                }
+
+                if (json != null) {
+
+                    Gson gson = new Gson();
+                    responseObject = gson.fromJson(json, Object.class);
+                }
+            }
+
+        } else {
+            throw new InvalidParameterException("Parâmetro Uri não pode ser nulo");
+        }
+
+        return responseObject;
+    }
+
     public static Object get(String auth, String uri, Class expectedReponse) throws IOException {
         Object responseObject = null;
 
@@ -151,10 +185,16 @@ public class RestfulUtility {
                             for (Object o : linkedTreeMap.entrySet()) {
 
                                 if (o != null) {
-                                    Object i = linkedTreeMap.get(((Entry) o).getKey());
+                                    String key = ((Entry) o).getKey().toString();
+                                    Object i = linkedTreeMap.get(key);
 
                                     String newJson = gson.toJson(i);
                                     Object newObj = gson.fromJson(newJson, expectedReponse);
+
+                                    if (newObj instanceof BaseObject) {
+                                        ((BaseObject) newObj).setKey(key);
+                                    }
+                                    
                                     items.add(newObj);
                                 }
                             }
