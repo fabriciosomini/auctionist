@@ -58,6 +58,8 @@ public class ItemController extends HttpServlet {
             
             List<Item> items = ItemRepository.Get().GetItemList(auth);
             request.setAttribute("itemCollection", items);
+            
+            response.setIntHeader("Refresh", 1);
             request.getRequestDispatcher("/index.jsp").forward(request, response);
 
         } else if (routePath.contains("/list-bids")) {
@@ -72,6 +74,8 @@ public class ItemController extends HttpServlet {
             } else {
                 request.setAttribute("isOwner", false);
             }
+            
+            response.setIntHeader("Refresh", 1);
             request.getRequestDispatcher("/item-bid-list.jsp").forward(request, response);
 
         } else if (routePath.endsWith("/create-item")) {
