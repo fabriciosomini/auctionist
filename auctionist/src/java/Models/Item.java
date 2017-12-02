@@ -15,10 +15,18 @@ import java.util.List;
 public class Item {
    
     private String id;
+    private String name;
     private String description;
     private float initialAmount;
     private float highestBid;
     private List<Bid> bids = new ArrayList();
+    
+    public String getName() {
+        return name;
+    }
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public float getHighestBid() {
         return highestBid;
