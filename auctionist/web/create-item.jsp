@@ -36,34 +36,35 @@
             <div class="row">
                 <div class="col-12 new-item-container" style="text-align: center;">
                     <h3>Cadastrar um novo item</h3>
-                    <form action="saveitem" method="POST"></form>
-                    <div class="row">
-                        <div class="col-3"></div>
-                        <div class="col-6">
-                            <input type="text" name="itemName" class="form-control" placeholder="Informe um nome para o item" />
+                    <form action="save-item" method="POST">
+                        <div class="row">
+                            <div class="col-3"></div>
+                            <div class="col-6">
+                                <input type="text" name="itemName" class="form-control" placeholder="Informe um nome para o item" />
+                            </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-3"></div>
-                        <div class="col-6">
-                            <textarea name="itemDescription" class="form-control" placeholder="Informe uma descrição detalhada para o item" style="min-height: 50px; max-height: 300px; height: 150px;"></textarea>
+                        <div class="row">
+                            <div class="col-3"></div>
+                            <div class="col-6">
+                                <textarea name="itemDescription" class="form-control" placeholder="Informe uma descrição detalhada para o item" style="min-height: 50px; max-height: 300px; height: 150px;"></textarea>
+                            </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-3"></div>
-                        <div class="col-3">
-                            <input type="number" name="itemPrice" class="form-control" placeholder="Informe um lance inicial" />
+                        <div class="row">
+                            <div class="col-3"></div>
+                            <div class="col-3">
+                                <input type="number" name="itemPrice" class="form-control" placeholder="Informe um lance inicial" />
+                            </div>
                         </div>
-                    </div>
-                    <div class="row" style="margin-top: 4rem;">
-                        <div class="col-4"></div>
-                        <div class="col-3">
-                            <input type="submit" name="btnSave" class="form-control btn btn-block btn-success" value="Salvar" />
+                        <div class="row" style="margin-top: 4rem;">
+                            <div class="col-4"></div>
+                            <div class="col-3">
+                                <input type="submit" name="btnSave" class="form-control btn btn-block btn-success" value="Salvar" />
+                            </div>
+                            <div class="col-2">
+                                <a href="list-item" class="form-control btn btn-block btn-secondary">Cancelar</a>
+                            </div>
                         </div>
-                        <div class="col-2">
-                            <a href="list-item" class="form-control btn btn-block btn-secondary">Cancelar</a>
-                        </div>
-                    </div>
+                    </form>
                 </div>                   
             </div>
             <div clas="row" style="margin-top: 0.5rem;">

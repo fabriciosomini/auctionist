@@ -47,10 +47,10 @@ public class ItemRepository {
        
         List<Item> itemList = new ArrayList();
         
-        Type listType = new TypeToken<ArrayList<Item>>(){}.getType();
+       
        
          try{
-           itemList = (List<Item>)RestfulUtility.get(auth, itemUrl, listType);
+           itemList = (List<Item>)RestfulUtility.get(auth, itemUrl, Item.class);
          }catch(IOException ex){}
         
        
@@ -71,11 +71,7 @@ public class ItemRepository {
     }
 
     public Item Save(String auth, Item item) throws IOException {
-        if (item.getId() != null) {
-            return InsertItem(auth, item);
-        } else {
-            return UpdateItem(auth, item);
-        }
+      return InsertItem(auth, item);
     }
 
     private Item InsertItem(String auth, Item item) throws IOException {

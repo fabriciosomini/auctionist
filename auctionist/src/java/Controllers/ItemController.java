@@ -9,9 +9,11 @@ import Models.Bid;
 import Models.Bidder;
 import Models.Item;
 import Repository.ItemRepository;
+import Utils.RestfulUtility;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -47,9 +49,10 @@ public class ItemController extends HttpServlet {
             String id = (String) request.getParameter("id");
             request.setAttribute("currentItem", ItemRepository.Get().GetItem(auth, id));
             request.getRequestDispatcher("/item-bid-list.jsp").forward(request, response);
-        }else if (routePath.endsWith("/create-item")) {   
+        } else if (routePath.endsWith("/create-item")) {
             request.getRequestDispatcher("/create-item.jsp").forward(request, response);
         }
+
     }
 
     /* private List<Item> generateData() {
@@ -95,6 +98,26 @@ public class ItemController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+          String routePath = request.getServletPath();
+        String auth = (String) request.getSession().getAttribute("IDTOKEN");
+        
+        if (routePath.endsWith("/save-item")) {
+
+            String id = UUID.randomUUID().toString();
+            String name = request.getParameter("itemName");
+            String description = request.getParameter("itemDescription");
+            float initialAmount = Float.valueOf(request.getParameter("itemPrice"));
+
+            Item item = new Item();
+            item.setId(id);
+            item.setName(name);
+            item.setDescription(description);
+            item.setInitialAmount(initialAmount);
+
+            ItemRepository.Get().Save(auth, item);
+
+            request.getRequestDispatcher("/index.jsp").forward(request, response);
+        }
     }
 
     /**

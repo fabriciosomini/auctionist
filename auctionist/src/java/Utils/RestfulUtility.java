@@ -7,6 +7,7 @@ package Utils;
 
 import Models.AuthenticationResponse;
 import com.google.gson.Gson;
+import com.google.gson.internal.LinkedTreeMap;
 import com.google.gson.reflect.TypeToken;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -15,6 +16,8 @@ import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Type;
 import java.security.InvalidParameterException;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map.Entry;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
@@ -25,7 +28,6 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.message.BasicHeader;
 import org.apache.http.protocol.HTTP;
-
 
 /**
  *
@@ -64,10 +66,10 @@ public class RestfulUtility {
                     json += line;
                 }
 
-              if(json!=null){
-                
-                Gson gson = new Gson();
-                responseObject = gson.fromJson(json, expectedReponse);
+                if (json != null) {
+
+                    Gson gson = new Gson();
+                    responseObject = gson.fromJson(json, expectedReponse);
                 }
             }
 
@@ -79,7 +81,7 @@ public class RestfulUtility {
     }
 
     public static Object put(String auth, String uri, Object object, Class expectedReponse) throws UnsupportedEncodingException, IOException {
-        Object responseObject= null;
+        Object responseObject = null;
 
         if (uri != null) {
             HttpClient client = HttpClientBuilder.create().build();
@@ -103,10 +105,10 @@ public class RestfulUtility {
                     json += line;
                 }
 
-               if(json!=null){
-                
-                Gson gson = new Gson();
-                responseObject = gson.fromJson(json, expectedReponse);
+                if (json != null) {
+
+                    Gson gson = new Gson();
+                    responseObject = gson.fromJson(json, expectedReponse);
                 }
             }
 
@@ -117,7 +119,7 @@ public class RestfulUtility {
         return responseObject;
     }
 
-    public static Object get(String auth, String uri, Type expectedReponse) throws IOException {
+    public static Object get(String auth, String uri, Class expectedReponse) throws IOException {
         Object responseObject = null;
 
         if (uri != null) {
@@ -136,12 +138,34 @@ public class RestfulUtility {
                     json += line;
                 }
 
-                if(json!=null){
-                
-                Gson gson = new Gson();
-                responseObject = gson.fromJson(json, expectedReponse);
+                if (json != null) {
+
+                    Gson gson = new Gson();
+                    responseObject = gson.fromJson(json, Object.class);
+
+                    if (responseObject != null) {
+
+                        List<Object> items = new ArrayList();
+                        if (responseObject instanceof LinkedTreeMap) {
+                            LinkedTreeMap linkedTreeMap = (LinkedTreeMap) responseObject;
+                            for (Object o : linkedTreeMap.entrySet()) {
+
+                                if (o != null) {
+                                    Object i = linkedTreeMap.get(((Entry) o).getKey());
+
+                                    String newJson = gson.toJson(i);
+                                    Object newObj = gson.fromJson(newJson, expectedReponse);
+                                    items.add(newObj);
+                                }
+                            }
+                        }
+
+                        if (items.size() > 0) {
+                            responseObject = items;
+                        }
+                    }
+
                 }
-      
 
             }
 
