@@ -36,7 +36,13 @@
                 <!-- ITEM CONTAINER -->
                 <div class="col-12">
                     <div class="row">
-                        <div class="col" style="text-align: center; margin-bottom: 1rem;"><h4>Lista de Leilões</h4></div>
+                        <div class="col-1">
+                            <a href="list-item"><img src="imgs/Refresh_icon.png" alt="refresh"/></a>                                                        
+                        </div>
+                        <div class="col-10" style="text-align: center; margin-bottom: 1rem;">
+                            <h4>Lista de Leilões</h4>
+                        </div>
+                        <div class="col-1"></div>
                     </div>
                     <div class="row" style="height: 50px;">
                         <div class="col-1"></div>

@@ -73,7 +73,7 @@
                     </div>
                     <hr style="width: 80%; margin-top: 1rem;"/>
 
-                    <div style="max-height: 500px; overflow-y: scroll; overflow-x: hidden;">   
+                    <div style="max-height: 500px; overflow-y: scroll; overflow-x: hidden;">
                         <!-- ITEM BIDS -->
                         <c:forEach var="itemBid" items="${currentItem.bids}">
                             <div class="row" style="min-height: 50px;">
