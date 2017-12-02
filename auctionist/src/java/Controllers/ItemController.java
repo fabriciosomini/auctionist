@@ -53,8 +53,10 @@ public class ItemController extends HttpServlet {
         String routePath = request.getServletPath();
         if (routePath.endsWith("/list-item")) {
 
+            //Reseta a mensagem de lance 
+            request.getSession().setAttribute("bidResult", null);
+            
             List<Item> items = ItemRepository.Get().GetItemList(auth);
-  
             request.setAttribute("itemCollection", items);
             request.getRequestDispatcher("/index.jsp").forward(request, response);
 
@@ -73,12 +75,18 @@ public class ItemController extends HttpServlet {
             request.getRequestDispatcher("/item-bid-list.jsp").forward(request, response);
 
         } else if (routePath.endsWith("/create-item")) {
+            //Reseta a mensagem de lance 
+             request.getSession().setAttribute("bidResult", null);
+              
             request.getRequestDispatcher("/create-item.jsp").forward(request, response);
+            
         } else if (routePath.contains("/delete-item")) {
+            
             String id = (String) request.getParameter("id");
             Item item = ItemRepository.Get().GetItem(auth, id);
             ItemRepository.Get().DeleteItem(auth, item.getKey());
             response.sendRedirect("list-item");
+            
         }
 
     }

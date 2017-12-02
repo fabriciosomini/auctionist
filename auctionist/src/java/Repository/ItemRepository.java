@@ -43,19 +43,13 @@ public class ItemRepository {
     }
 
     public List<Item> GetItemList(String auth) {
-      
-      
-       
+   
         List<Item> itemList = new ArrayList();
-        
-       
-       
+  
          try{
            itemList = (List<Item>)RestfulUtility.get(auth, itemUrl + authString, Item.class);
          }catch(IOException ex){}
-        
-       
-        
+    
         return  itemList;
     }
 
@@ -75,7 +69,6 @@ public class ItemRepository {
       return (Item) RestfulUtility.post(auth, itemUrl+authString , item, Item.class);
     }
 
-   
 
     public Item UpdateItem(String auth, Item item) throws IOException {
         return (Item) RestfulUtility.put(auth, itemUrl + "/" + item.getKey()  
