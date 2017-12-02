@@ -39,29 +39,52 @@
                     <div class="row top-spaced" style="margin-bottom: 2rem;">
                         <div class="col-2"></div>
                         <div class="col-5">
-                            <h3>Nome do item</h3>
+                            <h3>${currentItem.description}</h3>
                         </div>
-                        <div class="col-3" style="text-align: right;">
+                        <!--<div class="col-3" style="text-align: right;">
                             <h5>Imagem (se tiver)</h5>
-                        </div>
+                        </div>-->
                     </div>
                     <div class="row top-spaced">
                         <div class="col-2"></div>
                         <div class="col-3">
-                            <h6>Lance inicial: R$ 5,20</h6>
+                            <h6>Lance inicial: R$ ${currentItem.initialAmount}</h6>
                         </div>
                     </div>
-                    <div class="row top-spaced">
-                        <div class="col-2"></div>
-                        <div class="col-3">
-                            <h6>Maior lance: R$ 7,00</h6>
+                    <form method="POST" action="item-new-bid">
+                        <div class="row top-spaced">
+                            <div class="col-2"></div>                        
+                            <div class="col-2">                           
+                                <h6>Maior lance: R$ ${currentItem.highestBid}</h6>
+                            </div>
+                            <div class="col-3"></div>
+                            <div class="col-2">
+                                <input type="number" class="form-control" placeholder="Valor" name="txtBidValue" />
+                            </div>
+                            <div class="col-2">
+                                <input type="submit" class="form-control btn btn-block btn-primary" value="Dar um lance" />
+                            </div>
                         </div>
+                    </form>
+                    <div class="row">
+                        <div class="col-12" style="text-align: center; margin-top: 2rem;"><h4>Lances desta venda</h4></div>
                     </div>
+                    <hr style="width: 80%; margin-top: 1rem;"/>
+
+                    <div style="max-height: 500px; overflow-y: scroll; overflow-x: hidden;">   
+                        <!-- ITEM BIDS -->
+                        <c:forEach var="itemBid" items="${currentItem.bids}">
+                            <div class="row" style="min-height: 50px;">
+                                <div class="col-2"></div>
+                                <div class="col-8" style="padding: 1rem;">
+                                    <p>O usuário <strong>${itemBid.bidder}</strong> deu um lance de <strong>${itemBid.bidAmount}</strong></p>
+                                </div>
+                            </div>
+                            <hr style="width: 80%; margin-top: 1rem;"/>
+                        </c:forEach> 
+                    </div> 
+
                 </div>
-
-                <c:forEach var="item" items="${itemCollection}">
-
-                </c:forEach>
             </div>
         </div>
         <div clas="row" style="margin-top: 0.5rem;">
