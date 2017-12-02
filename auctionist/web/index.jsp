@@ -18,7 +18,7 @@
         <div class="top-index">
             <div class="container">
                 <div class="row">
-                    <div class="col-6">
+                    <div class="col-8">
                         <img src="imgs/W4U_A4-S.png" alt="logo_auctionist"/>
                     </div>
                     <div class="col-1 menu">
@@ -26,9 +26,6 @@
                     </div>
                     <div class="col-3 menu">
                         <a href="create-item">CADASTRAR ITEM</a>
-                    </div>
-                    <div class="col-2 menu">
-                        <a href="#">MENU 3</a>
                     </div>
                 </div>
             </div>
