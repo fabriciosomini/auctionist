@@ -5,8 +5,11 @@
  */
 package Controllers;
 
+import Models.Item;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -52,7 +55,40 @@ public class ItemController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+          
+        Item item1 = new Item();
+        item1.setDescription("CARRO VELHO");
+        item1.setId("1");
+        item1.setInitialAmount(2500);
+        
+          Item item2 = new Item();
+        item2.setDescription("CASA CAINDO AOS PEDAÇOS");
+        item2.setId("1");
+        item2.setInitialAmount(7570);
+        
+          Item item3 = new Item();
+        item3.setDescription("ROUPA USADA");
+        item3.setId("1");
+        item3.setInitialAmount(425);
+        
+          Item item4 = new Item();
+        item4.setDescription("FILHOS SUJOS");
+        item4.setId("1");
+        item4.setInitialAmount(100);
+        
+          Item item5 = new Item();
+        item5.setDescription("MARIDO BROXA");
+        item5.setId("1");
+        item5.setInitialAmount(12);
+        
+        List<Item> itemList = new  ArrayList();
+        itemList.add(item1);
+        itemList.add(item2);
+        itemList.add(item3);
+        itemList.add(item4);
+        itemList.add(item5);
+        //request.setAttribute("itemCollection", ItemRepository.Get().GetItemList(""));
+        request.setAttribute("itemCollection", itemList);
     }
 
     /**

@@ -2,6 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <!DOCTYPE html>
+<jsp:include page="/list-item" />
 <html>
     <head>
         <title>Auctionist! - Items</title>
@@ -13,7 +14,7 @@
         <link href="style.css" rel="stylesheet" type="text/css"/>
         <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
     </head>
-    <body>
+    <body> 
         <div class="top-index">
             <div class="container">
                 <div class="row">
