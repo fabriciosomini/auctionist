@@ -9,7 +9,6 @@ import Models.Bid;
 import Models.Bidder;
 import Models.Item;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletException;
@@ -58,13 +57,17 @@ public class ItemController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        
-        request.setAttribute("itemCollection", generateData());
+        String routePath = request.getServletPath();
+        if (routePath.endsWith("/list-item")) {
+            request.setAttribute("itemCollection", generateData());
+            request.getRequestDispatcher("/index.jsp").forward(request, response);
+        } else if (routePath.contains("/item-bid-list?id=")) {
+        }
     }
 
     private List<Item> generateData() {
 
-        float initialBid  = (float) Math.random();
+        float initialBid = (float) Math.random();
         List<Item> items = new ArrayList();
         for (int itemIndex = 0; itemIndex < 50; itemIndex++) {
 
@@ -77,8 +80,8 @@ public class ItemController extends HttpServlet {
                 bid.setBidAmount(initialBid);
                 bid.setBidder(bidder);
                 bids.add(bid);
-                
-                initialBid += 150; 
+
+                initialBid += 150;
 
             }
             Item item = new Item();
@@ -88,7 +91,7 @@ public class ItemController extends HttpServlet {
             items.add(item);
 
         }
-        
+
         return items;
 
     }

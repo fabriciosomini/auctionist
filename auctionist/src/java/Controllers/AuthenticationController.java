@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author fabri
  */
-@WebServlet(urlPatterns = {"/signin-submit"})
+@WebServlet(urlPatterns = {"/signin-submit", "/login"})
 public class AuthenticationController extends HttpServlet {
 
     /**
@@ -60,7 +60,9 @@ public class AuthenticationController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        
+        
+        request.getRequestDispatcher("/login.jsp").forward(request, response);
     }
 
     /**
@@ -91,12 +93,12 @@ public class AuthenticationController extends HttpServlet {
 
                         request.getSession().setAttribute("IDTOKEN", authentication.getIdToken());
                         request.getSession().setAttribute("signInResult", null);
-                        response.sendRedirect("index.jsp");
+                        response.sendRedirect("list-item");
 
                     } else {
                         
                         request.getSession().setAttribute("signInResult", "Usuário ou senha incorretos");
-                        response.sendRedirect("login.jsp");
+                        response.sendRedirect("login");
                     }
                 }
 
