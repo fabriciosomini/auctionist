@@ -91,6 +91,7 @@ public class ItemController extends HttpServlet {
             item.setName(name);
             item.setDescription(description);
             item.setInitialAmount(initialAmount);
+            item.setOwnerId(BidderSingleton.Get().getBidder().getIdToken());
 
             ItemRepository.Get().Save(auth, item);
 
