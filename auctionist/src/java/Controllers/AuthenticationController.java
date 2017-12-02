@@ -99,7 +99,8 @@ public class AuthenticationController extends HttpServlet {
                 }else {
                         
                      request.getSession().setAttribute("signInResult", "Usuário ou senha incorretos");
-                     response.sendRedirect("/auctionist");
+                     //response.sendRedirect("/auctionist");
+                     request.getRequestDispatcher("/login.jsp").forward(request, response);
                  
                     }
 
