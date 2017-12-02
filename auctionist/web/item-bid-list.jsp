@@ -53,7 +53,7 @@
                             <h6>Lance inicial: R$ ${currentItem.initialAmount}</h6>
                         </div>
                     </div>
-                    <form method="POST" action="add-bid">
+                    <form method="POST" action="add-bid?id=${currentItem.id}">
                         <div class="row top-spaced">
                             <div class="col-2"></div>                        
                             <div class="col-3">                           
@@ -79,7 +79,7 @@
                             <div class="row" style="min-height: 50px;">
                                 <div class="col-2"></div>
                                 <div class="col-8" style="padding: 1rem;">
-                                    <p>O usuário <strong>${itemBid.bidder}</strong> deu um lance de <strong>${itemBid.bidAmount}</strong></p>
+                                    <p>O usuário <strong>${itemBid.bidder.name}</strong> deu um lance de <strong>${itemBid.bidAmount}</strong></p>
                                 </div>
                             </div>
                             <hr style="width: 80%; margin-top: 1rem;"/>

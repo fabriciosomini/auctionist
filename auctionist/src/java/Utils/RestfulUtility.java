@@ -121,8 +121,8 @@ public class RestfulUtility {
         return responseObject;
     }
 
-    public static Object delete(String auth, String uri) throws UnsupportedEncodingException, IOException {
-        Object responseObject = null;
+    public static boolean delete(String auth, String uri) throws UnsupportedEncodingException, IOException {
+        boolean responseObject = false;
 
         if (uri != null) {
             HttpClient client = HttpClientBuilder.create().build();
@@ -132,25 +132,16 @@ public class RestfulUtility {
             HttpResponse httpResponse;
             httpResponse = client.execute((HttpUriRequest) httpRequest);
             if (httpResponse.getStatusLine().getStatusCode() == 200) {
-                BufferedReader rd = new BufferedReader(new InputStreamReader(httpResponse.getEntity().getContent()));
-                String line;
-                String json = "";
-                while ((line = rd.readLine()) != null) {
-                    json += line;
-                }
-
-                if (json != null) {
-
-                    Gson gson = new Gson();
-                    responseObject = gson.fromJson(json, Object.class);
-                }
+                return true;
+            } else {
+                return false;
             }
 
         } else {
             throw new InvalidParameterException("Parâmetro Uri não pode ser nulo");
         }
 
-        return responseObject;
+       
     }
 
     public static Object get(String auth, String uri, Class expectedReponse) throws IOException {
@@ -194,7 +185,7 @@ public class RestfulUtility {
                                     if (newObj instanceof BaseObject) {
                                         ((BaseObject) newObj).setKey(key);
                                     }
-                                    
+
                                     items.add(newObj);
                                 }
                             }

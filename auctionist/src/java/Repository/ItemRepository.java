@@ -66,7 +66,7 @@ public class ItemRepository {
         return itemList;
     }
 
-    public Object DeleteItem(String auth, String key) throws IOException {
+    public boolean DeleteItem(String auth, String key) throws IOException {
         
         return RestfulUtility.delete(auth,itemUrl + "/" + key  + authString);
     }
@@ -77,7 +77,8 @@ public class ItemRepository {
 
    
 
-    private Item UpdateItem(String auth, Item item) throws IOException {
-        return (Item) RestfulUtility.put(auth, itemUrl+authString , item, Item.class);
+    public Item UpdateItem(String auth, Item item) throws IOException {
+        return (Item) RestfulUtility.put(auth, itemUrl + "/" + item.getKey()  
+                + authString , item, Item.class);
     }
 }
