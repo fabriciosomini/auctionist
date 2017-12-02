@@ -47,6 +47,17 @@
                         </div>
                         <div class="col-1"></div>
                     </div>
+                    <form method="GET" action="list-item">
+                         <div class="row" style="margin-bottom: 1rem;">
+                        <div class="col-7"></div>
+                        <div class="col-3">
+                            <input type="text" name="txtSearch" placeholder="Informe sua busca" class="form-control" />                            
+                        </div>
+                        <div class="col-2">
+                            <input type="submit" class="form-control btn btn-block btn-primary" value="Pesquisar" />
+                        </div>
+                    </div>
+                    </form>                   
                     <div class="row" style="height: 50px;">
                         <div class="col-1"></div>
                         <div class="col-8"><h5>Item a venda</h5></div>
