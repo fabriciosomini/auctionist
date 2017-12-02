@@ -46,7 +46,7 @@
                     <div class="row">
                         <div class="col-3"></div>
                         <div class="col-6">
-                            <textarea name="itemName" class="form-control" placeholder="Informe uma descrição detalhara para o item" style="min-height: 50px; max-height: 300px; height: 150px;"></textarea>
+                            <textarea name="itemDescription" class="form-control" placeholder="Informe uma descrição detalhada para o item" style="min-height: 50px; max-height: 300px; height: 150px;"></textarea>
                         </div>
                     </div>
                     <div class="row">
