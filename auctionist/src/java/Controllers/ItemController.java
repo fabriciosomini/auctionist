@@ -66,14 +66,7 @@ public class ItemController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        String routePath = request.getServletPath();
-
-        if (routePath.endsWith("/create")) {
-
-            
-        }
-
+        processRequest(request, response);
     }
 
     /**

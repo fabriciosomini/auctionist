@@ -85,3 +85,7 @@ body {
     padding-top: 1rem;
     min-height: 600px;
 }
+
+.top-spaced {
+    margin-top: 1rem;
+}

@@ -35,45 +35,38 @@
 
         <div id="cont" class="container">
             <div class="row items-container">
-                <!-- ITEM CONTAINER -->
                 <div class="col-12">
-
-                    <!-- ITEM -->
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="row">
-                                <div class="col-12">
-                                    <a href="item-bid-list.jsp">Titulo</a>
-                                </div>
-
-                            </div> 
-                            <div class="row">
-                                <div class="col-12">
-                                    Titulo 2
-                                </div>
-
-                            </div>  
-                            <div class="row">
-                                <div class="col-12">
-                                    Titulo 3
-                                </div>
-
-                            </div>  
+                    <div class="row top-spaced" style="margin-bottom: 2rem;">
+                        <div class="col-2"></div>
+                        <div class="col-5">
+                            <h3>Nome do item</h3>
+                        </div>
+                        <div class="col-3" style="text-align: right;">
+                            <h5>Imagem (se tiver)</h5>
                         </div>
                     </div>
-                    <!-- END ITEM -->
-
-                    <!-- END ITEM CONTAINER -->
+                    <div class="row top-spaced">
+                        <div class="col-2"></div>
+                        <div class="col-3">
+                            <h6>Lance inicial: R$ 5,20</h6>
+                        </div>
+                    </div>
+                    <div class="row top-spaced">
+                        <div class="col-2"></div>
+                        <div class="col-3">
+                            <h6>Maior lance: R$ 7,00</h6>
+                        </div>
+                    </div>
                 </div>
 
                 <c:forEach var="item" items="${itemCollection}">
-                    <div><h4>${item.description}</h4></div>
+
                 </c:forEach>
             </div>
-            <div clas="row" style="margin-top: 0.5rem;">
-                <div class="col-12 footer">
-                    <p>Acadêmicos: Fabrício M. Somini e Guilherme Corrêa Milak</p>
-                </div>
+        </div>
+        <div clas="row" style="margin-top: 0.5rem;">
+            <div class="col-12 footer">
+                <p>Acadêmicos: Fabrício M. Somini e Guilherme Corrêa Milak</p>
             </div>
         </div>
     </body>

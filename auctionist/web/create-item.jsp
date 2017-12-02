@@ -21,10 +21,10 @@
                         <img src="imgs/W4U_A4-S.png" alt="logo_auctionist"/>
                     </div>
                     <div class="col-1 menu">
-                        <a href="list">INÍCIO</a>
+                        <a href="list-item">INÍCIO</a>
                     </div>
                     <div class="col-3 menu">
-                        <a href="create">CADASTRAR ITEM</a>
+                        <a href="create-item">CADASTRAR ITEM</a>
                     </div>
                     <div class="col-2 menu">
                         <a href="#">MENU 3</a>
