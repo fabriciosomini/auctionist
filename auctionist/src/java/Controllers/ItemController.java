@@ -32,8 +32,7 @@ import javax.servlet.http.HttpServletResponse;
     "/delete-item",
     "/list-item",
     "/list-bids",
-    "/add-bid",
-    "/signout"
+    "/add-bid"
 })
 public class ItemController extends HttpServlet {
 
@@ -87,12 +86,6 @@ public class ItemController extends HttpServlet {
             Item item = ItemRepository.Get().GetItem(auth, id);
             ItemRepository.Get().DeleteItem(auth, item.getKey());
             response.sendRedirect("list-item");
-            
-        }else if(routePath.contains("/signout")){
-            
-            BidderSingleton.Get().setBidder(null);
-            request.getSession().invalidate();
-            response.sendRedirect("login");
             
         }
 
