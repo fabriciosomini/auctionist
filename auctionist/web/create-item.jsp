@@ -52,7 +52,7 @@
                         <div class="row">
                             <div class="col-3"></div>
                             <div class="col-3">
-                                <input type="number" name="itemPrice" class="form-control" placeholder="Informe um lance inicial" />
+                                <input type="number" step="any" name="itemPrice" class="form-control" placeholder="Informe um lance inicial" />
                             </div>
                         </div>
                         <div class="row" style="margin-top: 4rem;">
