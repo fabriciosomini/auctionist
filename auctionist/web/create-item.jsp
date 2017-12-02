@@ -5,7 +5,7 @@
 <html>
     <head>
         <title>Auctionist! - Cadastrar um item</title>
-        <meta charset="UTF-8">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
         <link href="bootstrap-grid.min.css" rel="stylesheet" type="text/css"/>
@@ -17,7 +17,7 @@
         <div class="top-index">
             <div class="container">
                 <div class="row">
-                    <div class="col-8">
+                    <div class="col-6">
                         <img src="imgs/W4U_A4-S.png" alt="logo_auctionist"/>
                     </div>
                     <div class="col-1 menu">
@@ -26,6 +26,9 @@
                     <div class="col-3 menu">
                         <a href="create-item">CADASTRAR ITEM</a>
                     </div>
+                    <div class="col-2 menu">
+                        <a href="sign-out">SAIR</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -33,7 +36,7 @@
             <div class="row">
                 <div class="col-12 new-item-container" style="text-align: center;">
                     <h3>Cadastrar um novo item</h3>
-                    <form action="save-item" method="POST">
+                    <form action="save-item" method="POST" accept-charset="iso-8859-1">
                         <div class="row">
                             <div class="col-3"></div>
                             <div class="col-6">
