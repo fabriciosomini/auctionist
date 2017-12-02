@@ -43,10 +43,10 @@ public class AuthenticationUtility {
         authenticationRequest.setPassword(password);
         authenticationRequest.setReturnSecureToken(true);
 
-        RestfulUtility restfulUtility = new RestfulUtility();
-        restfulUtility.setSetUri(AUTH_URI);
         AuthenticationResponse authenticationResponse
-                = (AuthenticationResponse) restfulUtility.post(authenticationRequest, 
+                = (AuthenticationResponse) RestfulUtility.post(
+                        AUTH_URI,
+                        authenticationRequest, 
                         AuthenticationResponse.class);
 
         return authenticationResponse;

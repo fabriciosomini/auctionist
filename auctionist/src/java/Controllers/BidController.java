@@ -5,8 +5,6 @@
  */
 package Controllers;
 
-import Models.AuthenticationResponse;
-import Utils.AuthenticationUtility;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -19,8 +17,9 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author fabri
  */
-@WebServlet(urlPatterns = {"/signin-submit"})
-public class AuthenticationServlet extends HttpServlet {
+
+@WebServlet(urlPatterns = {"/save-bid"})
+public class BidController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,10 +38,10 @@ public class AuthenticationServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet AuthenticationServlet</title>");
+            out.println("<title>Servlet BidController</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet AuthenticationServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet BidController at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -74,35 +73,7 @@ public class AuthenticationServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        String routePath = request.getServletPath();
-
-        if (routePath.endsWith("/signin-submit")) {
-
-            String username = (String) request.getParameter("txtLogin");
-            String password = (String) request.getParameter("txtPass");
-
-            if (username != null && password != null) {
-                AuthenticationResponse authentication
-                        = AuthenticationUtility.Authenticate(username, password);
-
-                if (authentication != null) {
-                    if (authentication.isRegistered()) {
-
-                        request.getSession().setAttribute("IDTOKEN", authentication.getIdToken());
-                        request.getSession().setAttribute("signInResult", null);
-                        response.sendRedirect("index.jsp");
-
-                    } else {
-                        
-                        request.getSession().setAttribute("signInResult", "Usuário ou senha incorretos");
-                        response.sendRedirect("login.jsp");
-                    }
-                }
-
-            }
-
-        }
+        processRequest(request, response);
     }
 
     /**

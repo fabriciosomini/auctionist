@@ -6,7 +6,15 @@
     </servlet>
     <servlet>
         <servlet-name>AuthenticationServlet</servlet-name>
-        <servlet-class>Controllers.AuthenticationServlet</servlet-class>
+        <servlet-class>Controllers.AuthenticationController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ItemController</servlet-name>
+        <servlet-class>Controllers.ItemController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>BidController</servlet-name>
+        <servlet-class>Controllers.BidController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>AuctionController</servlet-name>
@@ -15,6 +23,14 @@
     <servlet-mapping>
         <servlet-name>AuthenticationServlet</servlet-name>
         <url-pattern>/AuthenticationServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ItemController</servlet-name>
+        <url-pattern>/ItemController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BidController</servlet-name>
+        <url-pattern>/BidController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

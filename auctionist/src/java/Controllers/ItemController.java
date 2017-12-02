@@ -5,8 +5,6 @@
  */
 package Controllers;
 
-import Models.AuthenticationResponse;
-import Utils.AuthenticationUtility;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -19,9 +17,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author fabri
  */
-
-@WebServlet(urlPatterns = {"/list", "/save-auction"})
-public class AuctionController extends HttpServlet {
+@WebServlet(urlPatterns = {"/save-item"})
+public class ItemController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,15 +31,18 @@ public class AuctionController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
- 
-        String routePath = request.getServletPath();
-
-        if (routePath.endsWith("/list")) {
-            
-       
-            request.getRequestDispatcher("index.jsp").forward(request, response);
-        }else if (routePath.endsWith("/novo")){
-         
+        response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet ItemController</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet ItemController at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
         }
     }
 
@@ -72,8 +72,7 @@ public class AuctionController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-     
-    
+        processRequest(request, response);
     }
 
     /**

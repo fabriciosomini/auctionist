@@ -27,13 +27,45 @@ import org.apache.http.protocol.HTTP;
  */
 public class RestfulUtility {
 
-    private String uri;
+    
+ 
 
-    void setSetUri(String uri) {
-        this.uri = uri;
+    public static  Object post(String uri, Object object, Class expectedReponse) throws UnsupportedEncodingException, IOException {
+        Object responseObject;
+        
+        if (uri != null) {
+            HttpClient client = HttpClientBuilder.create().build();
+            HttpPost httpRequest = new HttpPost(uri);
+
+            Gson toGson = new Gson();
+            String jsonBody = toGson.toJson(object);
+
+            StringEntity entity = new StringEntity(jsonBody);
+            entity.setContentType(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
+            httpRequest.setEntity(entity);
+
+            httpRequest.addHeader("content-type", "application/json");
+            HttpResponse httpResponse;
+            httpResponse = client.execute((HttpUriRequest) httpRequest);
+
+            BufferedReader rd = new BufferedReader(new InputStreamReader(httpResponse.getEntity().getContent()));
+            String line;
+            String json = "";
+            while ((line = rd.readLine()) != null) {
+                json += line;
+            }
+
+            Gson gson = new Gson();
+            responseObject = gson.fromJson(json, expectedReponse);
+
+        } else {
+            throw new InvalidParameterException("Parâmetro Uri não pode ser nulo");
+        }
+
+        return responseObject;
     }
-
-    Object post(Object object, Class expectedReponse) throws UnsupportedEncodingException, IOException {
+    
+     public static  Object put(String uri, Object object, Class expectedReponse) throws UnsupportedEncodingException, IOException {
         Object responseObject;
         
         if (uri != null) {
