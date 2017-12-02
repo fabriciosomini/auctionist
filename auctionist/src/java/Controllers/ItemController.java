@@ -85,6 +85,7 @@ public class ItemController extends HttpServlet {
 
             }
             Item item = new Item();
+            item.setId(String.valueOf(Math.random()).replace(".", ""));
             item.setDescription("Item " + String.valueOf(Math.random()));
             item.setInitialAmount(initialBid);
             bids.stream().forEach(p -> item.addBid(p));
