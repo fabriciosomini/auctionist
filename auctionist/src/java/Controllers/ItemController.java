@@ -13,6 +13,7 @@ import Repository.ItemRepository;
 import Utils.RestfulUtility;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 import javax.servlet.ServletException;
@@ -51,12 +52,18 @@ public class ItemController extends HttpServlet {
         String auth = (String) request.getSession().getAttribute("IDTOKEN");
         String routePath = request.getServletPath();
         if (routePath.endsWith("/list-item")) {
-            request.setAttribute("itemCollection", ItemRepository.Get().GetItemList(auth));
+
+            List<Item> items = ItemRepository.Get().GetItemList(auth);
+  
+            request.setAttribute("itemCollection", items);
             request.getRequestDispatcher("/index.jsp").forward(request, response);
+
         } else if (routePath.contains("/list-bids")) {
 
             String id = (String) request.getParameter("id");
             Item item = ItemRepository.Get().GetItem(auth, id);
+            Collections.reverse(item.getBids());
+           
             request.setAttribute("currentItem", item);
             if (item.getOwnerId().equals(BidderSingleton.Get().getBidder().getToken())) {
                 request.setAttribute("isOwner", true);
@@ -114,20 +121,26 @@ public class ItemController extends HttpServlet {
             Item item = ItemRepository.Get().GetItem(auth, id);
             float bidAmount = Float.valueOf(request.getParameter("txtBidValue"));
 
-            String description = request.getParameter("itemDescription");
+            if (bidAmount <= item.getHighestBid()) {
+                request.getSession().setAttribute("bidResult",
+                        "Seu lance deve ser maior que: R$ " + item.getHighestBid());
+            } else {
 
-            Bid bid = new Bid();
-            bid.setBidder(BidderSingleton.Get().getBidder());
-            bid.setBidAmount(0);
-            bid.setBidAmount(bidAmount);
+                request.getSession().setAttribute("bidResult", null);
+                String description = request.getParameter("itemDescription");
 
-            item.addBid(bid);
+                Bid bid = new Bid();
+                bid.setBidder(BidderSingleton.Get().getBidder());
+                bid.setBidAmount(0);
+                bid.setBidAmount(bidAmount);
 
-            ItemRepository.Get().UpdateItem(auth, item);
-             response.sendRedirect("list-bids?id="+ id);
-            
-            
-        
+                item.addBid(bid);
+
+                ItemRepository.Get().UpdateItem(auth, item);
+            }
+
+            response.sendRedirect("list-bids?id=" + id);
+
         }
     }
 
