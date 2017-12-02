@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Auctionist!</title>
+        <title>Auctionist! - Items</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -20,11 +20,11 @@
                     <div class="col-6">
                         <img src="imgs/W4U_A4-S.png" alt="logo_auctionist"/>
                     </div>
-                    <div class="col-2 menu">
+                    <div class="col-1 menu">
                         <a href="list">INÍCIO</a>
                     </div>
-                    <div class="col-2 menu">
-                        <a href="#">MENU 2</a>
+                    <div class="col-3 menu">
+                        <a href="create-item">CADASTRAR ITEM</a>
                     </div>
                     <div class="col-2 menu">
                         <a href="#">MENU 3</a>
@@ -33,7 +33,7 @@
             </div>
         </div>
 
-        <div class="container">
+        <div id="cont" class="container">
             <div class="row items-container">
                 <!-- ITEM CONTAINER -->
                 <div class="col-12">
@@ -62,7 +62,7 @@
                         </div>
                     </div>
                     <!-- END ITEM -->
-                    
+
                     <!-- END ITEM CONTAINER -->
                 </div>
 

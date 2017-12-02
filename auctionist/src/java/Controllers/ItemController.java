@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author fabri
  */
-@WebServlet(urlPatterns = {"/save-item", "/create-item","/delete-item" })
+@WebServlet(urlPatterns = {"/save-item", "/create-item", "/delete-item", "/list-item" })
 public class ItemController extends HttpServlet {
 
     /**
@@ -31,18 +31,12 @@ public class ItemController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet ItemController</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet ItemController at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        String routePath = request.getServletPath();
+
+        if (routePath.endsWith("/list-item")) {
+            request.getRequestDispatcher("/index.jsp").forward(request, response);
+        } else if (routePath.endsWith("/create-item")) {
+            request.getRequestDispatcher("/create-item.jsp").forward(request, response);
         }
     }
 
