@@ -15,11 +15,19 @@ import java.util.List;
 public class Item {
    
     private String id;
+    private String ownerId;
     private String name;
     private String description;
     private float initialAmount;
     private float highestBid;
     private List<Bid> bids = new ArrayList();
+    
+    public String getOwnerId() {
+        return ownerId;
+    }
+    public void setOwnerId(String ownerId) {
+        this.ownerId = ownerId;
+    }
     
     public String getName() {
         return name;

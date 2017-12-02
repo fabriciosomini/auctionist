@@ -8,6 +8,7 @@ package Controllers;
 import Models.Bid;
 import Models.Bidder;
 import Models.Item;
+import Repository.BidderSingleton;
 import Repository.ItemRepository;
 import Utils.RestfulUtility;
 import java.io.IOException;
@@ -47,7 +48,15 @@ public class ItemController extends HttpServlet {
             request.getRequestDispatcher("/index.jsp").forward(request, response);
         } else if (routePath.endsWith("/item-bid-list")) {
             String id = (String) request.getParameter("id");
-            request.setAttribute("currentItem", ItemRepository.Get().GetItem(auth, id));
+            Item item = ItemRepository.Get().GetItem(auth, id);
+            request.setAttribute("currentItem", item);
+
+            if (item.getOwnerId().equals(BidderSingleton.Get().getBidder().getIdToken())) {
+                request.setAttribute("isOwner", true);
+            } else {
+                request.setAttribute("isOwner", false);
+            }
+
             request.getRequestDispatcher("/item-bid-list.jsp").forward(request, response);
         } else if (routePath.endsWith("/create-item")) {
             request.getRequestDispatcher("/create-item.jsp").forward(request, response);
@@ -55,37 +64,6 @@ public class ItemController extends HttpServlet {
 
     }
 
-    /* private List<Item> generateData() {
-
-        float initialBid = (float) Math.random();
-        List<Item> items = new ArrayList();
-        for (int itemIndex = 0; itemIndex < 50; itemIndex++) {
-
-            List<Bid> bids = new ArrayList();
-            for (int i = 0; i < 120; i++) {
-                Bidder bidder = new Bidder();
-                bidder.setId(String.valueOf(i));
-                bidder.setName("Leiloante " + Math.random());
-                Bid bid = new Bid();
-                bid.setBidAmount(initialBid);
-                bid.setBidder(bidder);
-                bids.add(bid);
-
-                initialBid += 150;
-
-            }
-            Item item = new Item();
-            item.setId(String.valueOf(Math.random()).replace(".", ""));
-            item.setDescription("Item " + String.valueOf(Math.random()));
-            item.setInitialAmount(initialBid);
-            bids.stream().forEach(p -> item.addBid(p));
-            items.add(item);
-
-        }
-
-        return items;
-
-    }*/
     /**
      * Handles the HTTP <code>POST</code> method.
      *
@@ -98,9 +76,9 @@ public class ItemController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-          String routePath = request.getServletPath();
+        String routePath = request.getServletPath();
         String auth = (String) request.getSession().getAttribute("IDTOKEN");
-        
+
         if (routePath.endsWith("/save-item")) {
 
             String id = UUID.randomUUID().toString();
