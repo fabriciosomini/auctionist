@@ -72,7 +72,7 @@
                             </div>
                             <div class="col-1"></div>
                             <div class="col-3">
-                                <input type="number" class="form-control" placeholder="Valor" name="txtBidValue" />
+                                <input type="number" step="any" class="form-control" placeholder="Valor" name="txtBidValue" />
                                 <p style="color: red; font-size: 12px;">${bidResult}</p>
                             </div>
                             <div class="col-2">
