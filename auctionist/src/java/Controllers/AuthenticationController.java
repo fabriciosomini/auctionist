@@ -22,9 +22,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author fabri
  */
 @WebServlet(urlPatterns = {
-    "/signin", 
-    "/login",
-    "/signout"
+    "/auctionist"
 })
 public class AuthenticationController extends HttpServlet {
 
@@ -61,12 +59,14 @@ public class AuthenticationController extends HttpServlet {
 
         String routePath = request.getServletPath();
 
-        if (routePath.endsWith("/signin")) {
+        if (routePath.endsWith("/auctionist")) {
 
             String username = (String) request.getParameter("txtLogin");
             String password = (String) request.getParameter("txtPass");
+            String signInBtn = (String) request.getParameter("btnLogin");
+            String signOutbtnLoginBtn = (String) request.getParameter("btnLogout");
 
-            if (username != null && password != null) {
+            if (signInBtn!=null && username != null && password != null) {
                 AuthenticationResponse authentication
                         = AuthenticationUtility.Authenticate(username, password);
 
@@ -86,21 +86,27 @@ public class AuthenticationController extends HttpServlet {
                         
                         
 
-                    } else {
+                    } 
+                }else {
                         
                         request.getSession().setAttribute("signInResult", "Usuário ou senha incorretos");
-                        response.sendRedirect("login");
+                     response.sendRedirect("/auctionist");
+                       
+                        //  request.getRequestDispatcher("login.jsp").forward(request, response);
                     }
-                }
 
             }
+            else if(signOutbtnLoginBtn!=null)
+            {
+               request.getSession().setAttribute("IDTOKEN", null);
+               BidderSingleton.Get().setBidder(null);
+               request.getSession().invalidate();
 
-        }else if(routePath.contains("/signout")){
+               response.sendRedirect("/auctionist");
+            }
             
-            BidderSingleton.Get().setBidder(null);
-            response.sendRedirect("login");
-            //request.getSession().invalidate();
-            
+           
+
         }
     }
 

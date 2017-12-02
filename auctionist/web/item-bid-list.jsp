@@ -26,8 +26,8 @@
                     <div class="col-3 menu">
                         <a href="create-item">CADASTRAR ITEM</a>
                     </div>
-                    <div class="col-2 menu">
-                        <a href="signout">SAIR</a>
+                     <div class="col-2 menu">
+                        <a name="btnLogout" href="auctionist">SAIR</a>
                     </div>
                 </div>
             </div>

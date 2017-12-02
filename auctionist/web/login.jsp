@@ -25,7 +25,7 @@
                     <div class="row">
                         <div class="col-4"></div>
                         <div class="col-4">
-                            <form method="POST" action="signin">
+                            <form method="POST" action="auctionist">
                                 <input type="text" class="form-control" name="txtLogin" placeholder="Nome de usuário" />
                                 <input type="password" class="form-control" name="txtPass" placeholder="Senha" />
                                <div style="color: red" ${ signInResult ? 'style="visibility: hidden"'

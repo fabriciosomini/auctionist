@@ -19,6 +19,7 @@ import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map.Entry;
+import javax.security.sasl.AuthenticationException;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpDelete;
@@ -73,6 +74,9 @@ public class RestfulUtility {
                     Gson gson = new Gson();
                     responseObject = gson.fromJson(json, expectedReponse);
                 }
+            }else if(httpResponse.getStatusLine().getStatusCode() == 401)
+            {
+                throw new AuthenticationException("A sessão do usuário expirou.");
             }
 
         } else {
@@ -112,6 +116,9 @@ public class RestfulUtility {
                     Gson gson = new Gson();
                     responseObject = gson.fromJson(json, expectedReponse);
                 }
+            } else if(httpResponse.getStatusLine().getStatusCode() == 401)
+            {
+                throw new AuthenticationException("A sessão do usuário expirou.");
             }
 
         } else {
@@ -133,7 +140,12 @@ public class RestfulUtility {
             httpResponse = client.execute((HttpUriRequest) httpRequest);
             if (httpResponse.getStatusLine().getStatusCode() == 200) {
                 return true;
-            } else {
+            } 
+            else if(httpResponse.getStatusLine().getStatusCode() == 401)
+            {
+                throw new AuthenticationException("A sessão do usuário expirou.");
+            }
+            else {
                 return false;
             }
 
@@ -198,7 +210,10 @@ public class RestfulUtility {
 
                 }
 
-            }
+            }else if(httpResponse.getStatusLine().getStatusCode() == 401)
+            {
+                throw new AuthenticationException("A sessão do usuário expirou.");
+            } 
 
         } else {
             throw new InvalidParameterException("Parâmetro Uri não pode ser nulo");
