@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -50,21 +51,41 @@ public class ItemController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        if(!AuthenticationUtility.IsAuthenticated()){
+        if (!AuthenticationUtility.IsAuthenticated()) {
             response.sendRedirect("/auctionist");
             return;
         }
-        
+
         String auth = (String) BidderSingleton.Get().getBidder().getAuthToken();
         String routePath = request.getServletPath();
-        if (routePath.endsWith("/list-item")) {
+        if (routePath.contains("/list-item")) {
 
+            String search = (String) request.getParameter("search");
+    
+            List<Item> items = ItemRepository.Get().GetItemList(auth);
+
+            if (search != null) {
+
+                items = items.stream()
+                        .filter(
+                                i -> i.getName()
+                                        .toLowerCase()
+                                        .contains(search.toLowerCase()) ||   
+                                        i.getDescription()
+                                        .toLowerCase()
+                                        .contains(search.toLowerCase())
+                        ).collect(Collectors.toList());
+            }
+            else
+            {
+                   
+            request.removeAttribute("search");
+            }
             //Reseta a mensagem de lance 
             request.getSession().setAttribute("bidResult", null);
-            
-            List<Item> items = ItemRepository.Get().GetItemList(auth);
+
             request.setAttribute("itemCollection", items);
-            
+
             //response.setIntHeader("Refresh", 1);
             request.getRequestDispatcher("/index.jsp").forward(request, response);
 
@@ -73,30 +94,30 @@ public class ItemController extends HttpServlet {
             String id = (String) request.getParameter("id");
             Item item = ItemRepository.Get().GetItem(auth, id);
             Collections.reverse(item.getBids());
-           
+
             request.setAttribute("currentItem", item);
             if (item.getOwnerId().equals(BidderSingleton.Get().getBidder().getUserId())) {
                 request.setAttribute("isOwner", true);
             } else {
                 request.setAttribute("isOwner", false);
             }
-            
-           // response.setIntHeader("Refresh", 1);
+
+            // response.setIntHeader("Refresh", 1);
             request.getRequestDispatcher("/item-bid-list.jsp").forward(request, response);
 
         } else if (routePath.endsWith("/create-item")) {
             //Reseta a mensagem de lance 
-             request.getSession().setAttribute("bidResult", null);
-              
+            request.getSession().setAttribute("bidResult", null);
+
             request.getRequestDispatcher("/create-item.jsp").forward(request, response);
-            
+
         } else if (routePath.contains("/delete-item")) {
-            
+
             String id = (String) request.getParameter("id");
             Item item = ItemRepository.Get().GetItem(auth, id);
             ItemRepository.Get().DeleteItem(auth, item.getKey());
             response.sendRedirect("list-item");
-            
+
         }
 
     }
@@ -112,12 +133,12 @@ public class ItemController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
- 
-        if(!AuthenticationUtility.IsAuthenticated()){
+
+        if (!AuthenticationUtility.IsAuthenticated()) {
             response.sendRedirect("/auctionist");
             return;
         }
- 
+
         String routePath = request.getServletPath();
         String auth = BidderSingleton.Get().getBidder().getAuthToken();
 
@@ -164,7 +185,7 @@ public class ItemController extends HttpServlet {
 
             response.sendRedirect("list-bids?id=" + id);
 
-        } 
+        }
     }
 
     /**

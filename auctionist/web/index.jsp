@@ -51,7 +51,7 @@
                          <div class="row" style="margin-bottom: 1rem;">
                         <div class="col-7"></div>
                         <div class="col-3">
-                            <input type="text" name="txtSearch" placeholder="Informe sua busca" class="form-control" />                            
+                            <input type="text" name="search" placeholder="Informe sua busca" class="form-control" />                            
                         </div>
                         <div class="col-2">
                             <input type="submit" class="form-control btn btn-block btn-primary" value="Pesquisar" />
