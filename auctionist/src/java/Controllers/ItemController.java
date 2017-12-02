@@ -21,7 +21,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author fabri
  */
-@WebServlet(urlPatterns = {"/save-item", "/create-item", "/delete-item", "/list-item"})
+@WebServlet(urlPatterns = {"/save-item", "/create-item", "/delete-item", "/list-item", "/item-bid-list"})
 public class ItemController extends HttpServlet {
 
     /**
@@ -41,6 +41,10 @@ public class ItemController extends HttpServlet {
             request.getRequestDispatcher("/index.jsp").forward(request, response);
         } else if (routePath.endsWith("/create-item")) {
             request.getRequestDispatcher("/create-item.jsp").forward(request, response);
+        } else if (routePath.endsWith("/item-bid-list")) {
+            int id = Integer.valueOf(request.getParameter("id"));
+
+            request.getRequestDispatcher("/item-bid-list.jsp").forward(request, response);
         }
     }
 
@@ -61,7 +65,10 @@ public class ItemController extends HttpServlet {
         if (routePath.endsWith("/list-item")) {
             request.setAttribute("itemCollection", generateData());
             request.getRequestDispatcher("/index.jsp").forward(request, response);
-        } else if (routePath.contains("/item-bid-list?id=")) {
+        } else if (routePath.endsWith("/item-bid-list")) {
+            int id = Integer.valueOf(request.getParameter("id"));
+
+            request.getRequestDispatcher("/item-bid-list.jsp").forward(request, response);
         }
     }
 

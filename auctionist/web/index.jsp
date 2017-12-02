@@ -41,9 +41,14 @@
                     <div class="row">
                         <div class="col" style="text-align: center; margin-bottom: 1rem;"><h4>Lista de Leilões</h4></div>
                     </div>
+                    <div class="row" style="height: 50px;">
+                        <div class="col-1"></div>
+                        <div class="col-8"><h5>Item a venda</h5></div>
+                        <div class="col-2" style="text-align: right;"><h5>Maior Lance</h5></div>
+                    </div>
                     <c:forEach var="item" items="${itemCollection}">
                         <h6>
-                            <a class="item-link" href="item-bid-list?id="${item.id} style="height: 30px;">
+                            <a class="item-link" href="item-bid-list?id=${item.id}" style="height: 30px;">
                                 <div class="row top-spaced">
                                     <div class="col-1"></div>
                                     <div class="col-8">${item.description}</div>
