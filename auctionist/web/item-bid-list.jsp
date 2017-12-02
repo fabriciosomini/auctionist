@@ -34,7 +34,9 @@
             <div class="row items-container">
                 <div class="col-12">
                     <div class="row top-spaced" style="margin-bottom: 2rem;">
-                        <div class="col-1"></div>
+                        <div class="col-1">
+                            <a href="list-bids?id=${currentItem.id}"><img src="imgs/Refresh_icon.png" alt=""/></a>
+                        </div>
                         <div class="col-1" style="text-align: right;">
                             <c:if test="${isOwner == true}">
                                 <h4><a href="delete-item?id=${currentItem.id}" style="color: red;">X</a></h4>
