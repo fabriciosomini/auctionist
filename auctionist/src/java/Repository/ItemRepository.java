@@ -8,11 +8,14 @@ package Repository;
 import Models.Item;
 import Utils.RestfulUtility;
 import java.io.IOException;
+import java.sql.Array;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  *
@@ -27,8 +30,12 @@ public class ItemRepository {
         return itemRepository;
     }
 
-    public Item GetItem(int id) {
+    public Item GetItem(String id) {
 
+        List<Item> items = GetItemList("").stream().filter(p->p.getId().equals(id)).collect(Collectors.toList());
+        if(items.size()>0){
+          return items.get(0);
+        }
         return null;
     }
 

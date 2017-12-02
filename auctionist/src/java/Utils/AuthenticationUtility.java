@@ -32,7 +32,7 @@ public class AuthenticationUtility {
 
     private final static String AUTH_URI
             = "https://www.googleapis.com/identitytoolkit/v3/relyingparty/"
-            + "verifyPassword?key=AIzaSyAotwZe55Vb08M_2_rhLBcy2O4RRfs-AK0";
+            + "verifyPassword?key=AIzaSyAopOOxFjt-irkt4o3ZIZGi9IM9eJ8710Q";
 
     public static AuthenticationResponse Authenticate(String email, String password) throws UnsupportedEncodingException, IOException {
 

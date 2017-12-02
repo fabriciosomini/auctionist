@@ -8,6 +8,7 @@ package Controllers;
 import Models.Bid;
 import Models.Bidder;
 import Models.Item;
+import Repository.ItemRepository;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -44,7 +45,7 @@ public class ItemController extends HttpServlet {
             request.getRequestDispatcher("/index.jsp").forward(request, response);
         } else if (routePath.endsWith("/item-bid-list")) {
             String id = (String)request.getParameter("id");
-
+            request.setAttribute("currentItem", ItemRepository.Get().GetItem(id));
             request.getRequestDispatcher("/item-bid-list.jsp").forward(request, response);
         }
     }
