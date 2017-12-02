@@ -24,30 +24,7 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(urlPatterns = {"/save-item", "/create-item", "/delete-item", "/list-item", "/item-bid-list"})
 public class ItemController extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        String routePath = request.getServletPath();
-
-        if (routePath.endsWith("/list-item")) {
-            request.getRequestDispatcher("/index.jsp").forward(request, response);
-        } else if (routePath.endsWith("/create-item")) {
-            request.getRequestDispatcher("/create-item.jsp").forward(request, response);
-        } else if (routePath.endsWith("/item-bid-list")) {
-            int id = Integer.valueOf(request.getParameter("id"));
-
-            request.getRequestDispatcher("/item-bid-list.jsp").forward(request, response);
-        }
-    }
-
+ 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -66,13 +43,13 @@ public class ItemController extends HttpServlet {
             request.setAttribute("itemCollection", generateData());
             request.getRequestDispatcher("/index.jsp").forward(request, response);
         } else if (routePath.endsWith("/item-bid-list")) {
-            int id = Integer.valueOf(request.getParameter("id"));
+            String id = (String)request.getParameter("id");
 
             request.getRequestDispatcher("/item-bid-list.jsp").forward(request, response);
         }
     }
 
-    private List<Item> generateData() {
+     private List<Item> generateData() {
 
         float initialBid = (float) Math.random();
         List<Item> items = new ArrayList();
@@ -115,7 +92,7 @@ public class ItemController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        
     }
 
     /**
