@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author fabri
  */
-@WebServlet(urlPatterns = {"/save-item"})
+@WebServlet(urlPatterns = {"/save-item", "/create"})
 public class ItemController extends HttpServlet {
 
     /**
